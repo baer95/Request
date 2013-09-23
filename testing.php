@@ -9,10 +9,10 @@ $_POST["json"] = '{"Herausgeber":"Xema","Nummer":"1234-5678-9012-3456","Deckung"
 // json_decode: JSON-String -> PHP-Variable
 // json_encode: PHP-Variable -> JSON-String
 
-require("Request.php");
-require("Adjust.php");
+require("Frick/FBA/Request/SplClassLoader.php");
 
-
+$classLoader = new \Frick\FBA\Request\SplClassLoader("Frick", 'D:/Dropbox/wwwroot/Request');
+$classLoader->register();
 
 $a = new \Frick\FBA\Request\Parser();
 
