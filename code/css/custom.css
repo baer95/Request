@@ -1,0 +1,25 @@
+html {
+	font-family: Calibri, Arial;
+	margin: 0px;
+	padding: 0px;
+}
+.container {
+	width: 800px;
+	margin: 0 auto;
+}
+.textarea {
+	width: 800px;
+	height: 150px;
+}
+pre {
+	padding: 9.5px;
+	font-size: 13px;
+	line-height: 20px;
+	word-break: break-all;
+	word-wrap: break-word;
+	white-space: pre-wrap;
+	background-color: rgb(245, 245, 245);
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	border-radius: 4px 4px 4px 4px;
+	font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+}
