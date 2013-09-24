@@ -123,4 +123,8 @@ class Adjust
     {
         //
     }
+    public static function REQUEST_BINARY($i, $adjust = true)
+    {
+        //
+    }
 }

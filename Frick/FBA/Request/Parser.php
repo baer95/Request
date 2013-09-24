@@ -15,24 +15,7 @@ class Parser
     private $cookieVarTypes = array();
     private $filesVarTypes = array();
 
-    private $classConstants = array(
-         1 => "REQUEST_USERNAME",
-         2 => "REQUEST_PASSWORD",
-         3 => "REQUEST_EMAIL",
-         4 => "REQUEST_BOOL",
-         5 => "REQUEST_INT",
-         6 => "REQUEST_NUMERIC",
-         7 => "REQUEST_FLOAT",
-         8 => "REQUEST_IPv4",
-         9 => "REQUEST_IPv6",
-        10 => "REQUEST_JSON",
-        11 => "REQUEST_FILENAME",
-        12 => "REQUEST_MIME",
-        13 => "REQUEST_FILESIZE",
-        14 => "REQUEST_WEBPATH",
-        15 => "REQUEST_FSPATH",
-        16 => "REQUEST_ARRAY"
-    );
+    private $classConstants = array();
 
     /**
      * __construct
@@ -41,8 +24,10 @@ class Parser
      */
     public function __construct()
     {
-        foreach ($this->classConstants as $key => $name) {
-            define($name, $key);
+        $this->classConstants = get_class_methods("\Frick\FBA\Request\Adjust");
+
+        foreach ($this->classConstants as $int => $name) {
+            define($name, $int);
         }
 
         $this->setFilesVarTypes("name", REQUEST_FILENAME);
@@ -198,8 +183,6 @@ class Parser
         return $this;
     }
 
-    //####################################################
-
     /**
      * This Method walks through an Array and parses the Values using the Adjust-Class to match the given Types.
      * @param   array   $Array  //
@@ -218,10 +201,8 @@ class Parser
             }
         }
 
-        return $array;
+        return $dataArray;
     }
-
-    //####################################################
 
     /**
      * This Method applies the parse()-Method to the the USER-Arrays.
