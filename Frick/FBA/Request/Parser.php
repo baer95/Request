@@ -15,7 +15,24 @@ class Parser
     private $cookieVarTypes = array();
     private $filesVarTypes = array();
 
-    public $parsedValues = array();
+    private $classConstants = array(
+         1 => "REQUEST_USERNAME",
+         2 => "REQUEST_PASSWORD",
+         3 => "REQUEST_EMAIL",
+         4 => "REQUEST_BOOL",
+         5 => "REQUEST_INT",
+         6 => "REQUEST_NUMERIC",
+         7 => "REQUEST_FLOAT",
+         8 => "REQUEST_IPv4",
+         9 => "REQUEST_IPv6",
+        10 => "REQUEST_JSON",
+        11 => "REQUEST_FILENAME",
+        12 => "REQUEST_MIME",
+        13 => "REQUEST_FILESIZE",
+        14 => "REQUEST_WEBPATH",
+        15 => "REQUEST_FSPATH",
+        16 => "REQUEST_ARRAY"
+    );
 
     /**
      * __construct
@@ -24,21 +41,9 @@ class Parser
      */
     public function __construct()
     {
-        define("REQUEST_USERNAME",   1);
-        define("REQUEST_PASSWORD",   2);
-        define("REQUEST_EMAIL",      3);
-        define("REQUEST_BOOL",       4);
-        define("REQUEST_INT",        5);
-        define("REQUEST_NUMERIC",    6);
-        define("REQUEST_FLOAT",      7);
-        define("REQUEST_IPv4",       8);
-        define("REQUEST_IPv6",       9);
-        define("REQUEST_JSON",      10);
-        define("REQUEST_FILENAME",  11);
-        define("REQUEST_MIME",      12);
-        define("REQUEST_FILESIZE",  13);
-        define("REQUEST_WEBPATH",   14);
-        define("REQUEST_FSPATH",    15);
+        foreach ($this->classConstants as $key => $name) {
+            define($name, $key);
+        }
 
         $this->setFilesVarTypes("name", REQUEST_FILENAME);
         $this->setFilesVarTypes("type", REQUEST_MIME);
@@ -200,15 +205,15 @@ class Parser
      * @param   array   $Array  //
      * @return  object          The Instance that is currently worked on. Used for Method-Chaining.
      */
-    public function parse($dataArray, $typesArray)   //sollte private sein!
+    private function parse($dataArray, $typesArray)
     {
         if(!is_array($dataArray)) return false;
         if(!is_array($typesArray)) return false;
 
         foreach ($dataArray as $key => &$value) {
-            // Es werden nur Werte geparsed, die vom User definiert worden sind:
+            // Parse only Values that have a user-defined type:
             if (array_key_exists($key, $typesArray)) {
-                // $type muss ein Wort sein, das zum INT in $typesArray[$key] passt... :O
+                $type = $this->classConstants[$typesArray[$key]];
                 $value = \Frick\FBA\Request\Adjust::$type($value, $adjust = true);
             }
         }

@@ -4,41 +4,37 @@ namespace Frick\FBA\Request;
 
 class Adjust
 {
-    public static function USERNAME($i, $adjust = true)
+    public static function REQUEST_USERNAME($i, $adjust = true)
     {
         //
     }
-    public static function PASSWORD($i, $adjust = true)
+    public static function REQUEST_PASSWORD($i, $adjust = true)
     {
         //
     }
-    public static function EMAIL($input, $adjust = true)
+    public static function REQUEST_EMAIL($i, $adjust = true)
     {
-        $filtered = filter_var($input, FILTER_VALIDATE_EMAIL);
+        $filtered = filter_var($i, FILTER_VALIDATE_EMAIL);
         // oder:
-        $regex;
+        $regex = "/^[a-zA-Z\d][\w\.-]*[a-zA-Z\d]@[a-zA-Z\d][\w\.-]*\.(?:[a-zA-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|travel|hotel|museum)$/i";
     }
-    public static function BOOL($i, $adjust = true)
+    public static function REQUEST_BOOL($i, $adjust = true)
     {
         //
     }
-    public static function INT($i, $adjust = true)
+    public static function REQUEST_INT($i, $adjust = true)
     {
         //
     }
-    public static function NUMERIC($i, $adjust = true)
+    public static function REQUEST_NUMERIC($i, $adjust = true)
     {
         //
     }
-    public static function FLOAT($i, $adjust = true)
+    public static function REQUEST_FLOAT($i, $adjust = true)
     {
         //
     }
-    public static function FILE($i, $adjust = true)
-    {
-        //
-    }
-    public static function IPv4($input, $adjust = true)
+    public static function REQUEST_IPv4($input, $adjust = true)
     {
         $filtered = filter_var($input, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
 
@@ -78,7 +74,7 @@ class Adjust
             return false;
         }
     }
-    public static function IPv6($input, $adjust = true)
+    public static function REQUEST_IPv6($input, $adjust = true)
     {
         $filtered = filter_var($input, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
 
@@ -92,15 +88,39 @@ class Adjust
             return false;
         }
     }
-    public static function JSON($json, $adjust = true)
+    public static function REQUEST_JSON($input, $adjust = true)
     {
-        json_decode($json);
+        json_decode($input);
         if (json_last_error() === JSON_ERROR_NONE) {
-            return $json;
+            return $input;
         } elseif ($adjust) {
             return "{\r\t\"ErrorCode\": ".json_last_error().",\r\t\"ErrorMessage\": \"".json_last_error_msg()."\"\r}";
         } else {
             return false;
         }
+    }
+    public static function REQUEST_FILENAME($i, $adjust = true)
+    {
+        //
+    }
+    public static function REQUEST_MIME($i, $adjust = true)
+    {
+        //
+    }
+    public static function REQUEST_FILESIZE($i, $adjust = true)
+    {
+        //
+    }
+    public static function REQUEST_WEBPATH($i, $adjust = true)
+    {
+        //
+    }
+    public static function REQUEST_FSPATH($i, $adjust = true)
+    {
+        //
+    }
+    public static function REQUEST_ARRAY($i, $adjust = true)
+    {
+        //
     }
 }

@@ -14,9 +14,43 @@ require("Frick/FBA/Request/SplClassLoader.php");
 $classLoader = new \Frick\FBA\Request\SplClassLoader("Frick", 'D:/Dropbox/wwwroot/Request');
 $classLoader->register();
 
-$a = new \Frick\FBA\Request\Parser();
+// $a = new \Frick\FBA\Request\Parser();
 
 // echo $a->parse();
+
+include ("Frick/FBA/Request/Adjust.php");
+
+
+
+
+
+
+
+
+$array = get_class_methods("\Frick\FBA\Request\Adjust");
+
+echo "<pre>";
+var_dump($array);
+echo "</pre>";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
