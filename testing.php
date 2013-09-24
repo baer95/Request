@@ -33,14 +33,6 @@ $a->setPostVarType("username", REQUEST_USERNAME);
 $a->setPostVarType("password", REQUEST_PASSWORD);
 $a->setPostVarType("json", REQUEST_JSON);
 
+$a->parse_USER();
 
-
-
-
-// $a->parse_USER();
-
-// $a->parse_POST();
-
-// $a->parse_GET();
-
-// $a->parse_ALL();
+$a->parse_ALL();
