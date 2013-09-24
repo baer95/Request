@@ -21,7 +21,7 @@ $a = new \Frick\FBA\Request\Parser();
 $array = array(
     "username" => "b.frick",
     "password" => "91fri173",
-    "address"  => "85.124.157.100:443");
+    "address"  => "  85.  124.157.100:443");
 
 $a->addUserDefinedArray("login", $array);
 
@@ -36,3 +36,14 @@ $a->setPostVarType("json", REQUEST_JSON);
 $a->parse_USER();
 
 $a->parse_ALL();
+
+echo $array["address"];
+
+echo "<hr>";
+
+$input = "85.  124.157.100:443";
+
+var_dump(filter_var($input, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4));
+
+
+

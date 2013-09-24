@@ -6,11 +6,11 @@ class Adjust
 {
     public static function REQUEST_USERNAME($i, $adjust = true)
     {
-        echo $i;
+        //
     }
     public static function REQUEST_PASSWORD($i, $adjust = true)
     {
-        echo $i;
+        //
     }
     public static function REQUEST_EMAIL($i, $adjust = true)
     {
@@ -20,19 +20,19 @@ class Adjust
     }
     public static function REQUEST_BOOL($i, $adjust = true)
     {
-        echo $i;
+        //
     }
     public static function REQUEST_INT($i, $adjust = true)
     {
-        echo $i;
+        //
     }
     public static function REQUEST_NUMERIC($i, $adjust = true)
     {
-        echo $i;
+        //
     }
     public static function REQUEST_FLOAT($i, $adjust = true)
     {
-        echo $i;
+        //
     }
     public static function REQUEST_IPv4($input, $adjust = true)
     {
@@ -101,30 +101,30 @@ class Adjust
     }
     public static function REQUEST_FILENAME($i, $adjust = true)
     {
-        echo $i;
+        //
     }
     public static function REQUEST_MIME($i, $adjust = true)
     {
-        echo $i;
+        //
     }
     public static function REQUEST_FILESIZE($i, $adjust = true)
     {
-        echo $i;
+        //
     }
     public static function REQUEST_WEBPATH($i, $adjust = true)
     {
-        echo $i;
+        //
     }
     public static function REQUEST_FSPATH($i, $adjust = true)
     {
-        echo $i;
+        //
     }
     public static function REQUEST_ARRAY($i, $adjust = true)
     {
-        echo $i;
+        //
     }
     public static function REQUEST_BINARY($i, $adjust = true)
     {
-        echo $i;
+        //
     }
 }
