@@ -15,7 +15,7 @@ class Parser
     private $cookieVarTypes = array();
     private $filesVarTypes = array();
 
-    public $classConstants = array();
+    private $classConstants = array();
 
     /**
      * __construct
