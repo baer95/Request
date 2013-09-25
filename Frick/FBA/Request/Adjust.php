@@ -2,29 +2,67 @@
 
 namespace Frick\FBA\Request;
 
+// Bei erfolgreicher Prüfung:
+//      return $i;
+// Bei fehlgeschlagener Prüfung:
+//      berichtigt:     return $i;
+//      unberichtigt:   return null;
+
 class Adjust
 {
     public static function REQUEST_USERNAME($i, $adjust = true)
     {
-        //
+        $allowedChars = "";
+        return $i;
     }
     public static function REQUEST_PASSWORD($i, $adjust = true)
     {
-        //
+        $allowedChars = "";
+        return $i;
     }
     public static function REQUEST_EMAIL($i, $adjust = true)
     {
-        $filtered = filter_var($i, FILTER_VALIDATE_EMAIL);
-        // oder:
-        $regex = "/^[a-zA-Z\d][\w\.-]*[a-zA-Z\d]@[a-zA-Z\d][\w\.-]*\.(?:[a-zA-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|travel|hotel|museum)$/i";
+        // $filtered = filter_var($i, FILTER_VALIDATE_EMAIL);
+        $emailRegex = "/^[a-zA-Z\d][\w\.-]*[a-zA-Z\d]@[a-zA-Z\d][\w\.-]*\.(?:[a-zA-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|travel|hotel|museum)$/i";
+        $matches = array();
+        $result = preg_match($emailRegex, $i, $matches);
+        if ($result === 0) {
+            if ($adjust) {
+                //
+                // berichtigen mit Hilfe von $matches
+                //
+            } else {
+                return null;
+            }
+        } elseif ($result === 1) {
+            return $i;
+        } else {
+            throw new \Exception("Sxntax Error in Regular Expression.", 1);
+        }
+    }
+    public static function REQUEST_STRING($i, $adjust = true)
+    {
+        //
     }
     public static function REQUEST_BOOL($i, $adjust = true)
     {
-        //
+        if (is_bool($i)) {
+            return $i;
+        } elseif ($adjust) {
+            return (bool) $i;
+        } else {
+            return null;
+        }
     }
     public static function REQUEST_INT($i, $adjust = true)
     {
-        //
+        if (is_int($i)) {
+            return $i;
+        } elseif ($adjust) {
+            return (int) $i;
+        } else {
+            return null;
+        }
     }
     public static function REQUEST_NUMERIC($i, $adjust = true)
     {
@@ -101,7 +139,7 @@ class Adjust
     }
     public static function REQUEST_FILENAME($i, $adjust = true)
     {
-        //
+        // Verbotene Zeichen in Windows: \/:*?"<>|
     }
     public static function REQUEST_MIME($i, $adjust = true)
     {
@@ -109,7 +147,13 @@ class Adjust
     }
     public static function REQUEST_FILESIZE($i, $adjust = true)
     {
-        //
+        if (is_int($i)) {
+            return $i;
+        } elseif ($adjust) {
+            return (int) $i;
+        } else {
+            return false;
+        }
     }
     public static function REQUEST_WEBPATH($i, $adjust = true)
     {
@@ -121,7 +165,13 @@ class Adjust
     }
     public static function REQUEST_ARRAY($i, $adjust = true)
     {
-        //
+        if (is_array($i)) {
+            return $i;
+        } elseif ($adjust) {
+            return array();
+        } else {
+            return false;
+        }
     }
     public static function REQUEST_BINARY($i, $adjust = true)
     {

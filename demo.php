@@ -2,8 +2,6 @@
 
 error_reporting(E_ALL);
 
-//require("./classes/");
-
 ?>
 <!DOCTYPE html>
 <html>

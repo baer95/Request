@@ -15,7 +15,7 @@ class Parser
     private $cookieVarTypes = array();
     private $filesVarTypes = array();
 
-    private $classConstants = array();
+    public $classConstants = array();
 
     /**
      * __construct
@@ -98,7 +98,7 @@ class Parser
      */
     public function setGetVarType($key, $type)
     {
-        $this->getVarTypes["key"] = $type;
+        $this->getVarTypes[$key] = $type;
         return $this;
     }
 
@@ -125,7 +125,7 @@ class Parser
      */
     public function setPostVarType($key, $type)
     {
-        $this->postVarTypes["key"] = $type;
+        $this->postVarTypes[$key] = $type;
         return $this;
     }
 
