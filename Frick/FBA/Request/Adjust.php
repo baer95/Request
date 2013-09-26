@@ -172,6 +172,7 @@ class Adjust
         // Mime-Typen sind definiert, eventuell mit liste vergleichen?
         // Syntax nicht allzukompliziert... regex verwenden?
         // sonst tags entfernen, anführungszeichen entfernen, sonderzeichen (ausser [/-]) entfernen
+        $mimeRegex = "/^[a-z\d]+[\/]{1}[a-z]{1}[a-z\d\.-]+$/i";
     }
     public static function REQUEST_FILESIZE($i, $adjust = true)
     {
