@@ -8,19 +8,12 @@
     <body>
 <?php
 
-error_reporting(E_ALL);
-
-require_once("Frick/FBA/Request/SplClassLoader.php");
-
-$classLoader = new \Frick\FBA\Request\SplClassLoader("Frick", 'D:/Dropbox/wwwroot/Request');
-$classLoader->register();
-
 $array = array(
     "username" => "b.frick",
     "password" => "91fri173",
     "email" => "bernard.frick@gmx.at",
     "string" => "1234567890ß´!§$%&/()=?`²³{[]}\"",
-    "bool" => true,
+    "bool" => "",
     "int" => 123,
     "numeric" => "123",
     "float" => 1.25,
@@ -81,11 +74,35 @@ $a->setPostVarType("username", REQUEST_USERNAME)
   ->setPostVarType("array", REQUEST_ARRAY)
   ->setPostVarType("binary", REQUEST_BINARY);
 
+$a->addUserDefinedArray("testing", $array);
+
+$a->setUserVarType("testing", "username", REQUEST_USERNAME)
+  ->setUserVarType("testing", "password", REQUEST_PASSWORD)
+  ->setUserVarType("testing", "email", REQUEST_EMAIL)
+  ->setUserVarType("testing", "string", REQUEST_STRING)
+  ->setUserVarType("testing", "bool", REQUEST_BOOL)
+  ->setUserVarType("testing", "int", REQUEST_INT)
+  ->setUserVarType("testing", "numeric", REQUEST_NUMERIC)
+  ->setUserVarType("testing", "float", REQUEST_FLOAT)
+  ->setUserVarType("testing", "ipv4", REQUEST_IPv4)
+  ->setUserVarType("testing", "ipv6", REQUEST_IPv6)
+  ->setUserVarType("testing", "json", REQUEST_JSON)
+  ->setUserVarType("testing", "filename", REQUEST_FILENAME)
+  ->setUserVarType("testing", "mime", REQUEST_MIME)
+  ->setUserVarType("testing", "filesize", REQUEST_FILESIZE)
+  ->setUserVarType("testing", "webpath", REQUEST_WEBPATH)
+  ->setUserVarType("testing", "fspath", REQUEST_FSPATH)
+  ->setUserVarType("testing", "array", REQUEST_ARRAY)
+  ->setUserVarType("testing", "binary", REQUEST_BINARY);
+
 $a->parse_USER()
   ->parse_GET()
   ->parse_POST()
   ->parse_COOKIE()
   ->parse_FILES();
+
+$parsedArray = $a->getUserDefinedArray("testing");
+
 
 ?>
     </body>
