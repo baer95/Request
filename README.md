@@ -58,23 +58,45 @@ The official SplClassLoader-Gist by Jwage can be found here:
 
 * https://gist.github.com/jwage/221634
 
-
+The code snippet below shows the correct usage of the SplClassLoader to load the Classes needed to secure your REQUEST-Data.
 
 ```php
+<?php
+
 require_once("lib/Frick/FBA/Request/SplClassLoader.php");
 
 $classLoader = new \Frick\FBA\Request\SplClassLoader("Frick", 'path/to/your/project/lib');
-$classLoader->register();`
+$classLoader->register();
 
+?>
 ```
-
 
 ###Loading the Classes manually
 
+To use the built-in functions in PHP, do the following:
 
+```php
+<?php
 
-To use th
+require_once("lib/Frick/FBA/Request/Parser.php");
+require_once("lib/Frick/FBA/Request/Adjust.php");
+
+?>
+```
 
 Usage
 -----
+
+
+
+
+
+
+
+
+
+
+
+
+
 
