@@ -63,7 +63,7 @@ The code snippet below shows the correct usage of the SplClassLoader to load the
 ```php
 <?php
 
-require_once("lib/Frick/FBA/Request/SplClassLoader.php");
+require_once("path/to/your/project/lib/Frick/FBA/Request/SplClassLoader.php");
 
 $classLoader = new \Frick\FBA\Request\SplClassLoader("Frick", 'path/to/your/project/lib');
 $classLoader->register();
@@ -78,14 +78,16 @@ To use the built-in functions in PHP, do the following:
 ```php
 <?php
 
-require_once("lib/Frick/FBA/Request/Parser.php");
-require_once("lib/Frick/FBA/Request/Adjust.php");
+require_once("path/to/your/project/lib/Frick/FBA/Request/Parser.php");
+require_once("path/to/your/project/lib/Frick/FBA/Request/Adjust.php");
 
 ?>
 ```
 
 Usage
 -----
+
+
 
 
 
