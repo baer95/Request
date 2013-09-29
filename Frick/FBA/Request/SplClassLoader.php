@@ -1,6 +1,6 @@
 <?php
 
-namespace Frick\FBA\Request;
+namespace Frick\Request;
 
 /**
  * SplClassLoader implementation that implements the technical interoperability

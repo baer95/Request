@@ -36,7 +36,7 @@ foreach ($array as $key => $value) {
     $_COOKIE[$key] = $value;
 }
 
-$a = new \Frick\FBA\Request\Parser();
+$a = new \Frick\Request\Parser();
 
 $a->addUserDefinedArray("testing", $array);
 

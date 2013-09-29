@@ -1,6 +1,6 @@
 <?php
 
-namespace Frick\FBA\Request;
+namespace Frick\Request;
 
 /**
  * This class blablabla.
@@ -26,7 +26,7 @@ class Parser
      */
     public function __construct()
     {
-        $this->classConstants = get_class_methods("\Frick\FBA\Request\Adjust");
+        $this->classConstants = get_class_methods("\Frick\Request\Adjust");
 
         foreach ($this->classConstants as $int => $name) {
             define($name, $int);
@@ -199,7 +199,7 @@ class Parser
             // Parse only Values that have a user-defined type:
             if (array_key_exists($key, $typesArray)) {
                 $type = $this->classConstants[$typesArray[$key]];
-                $value = \Frick\FBA\Request\Adjust::$type($value, $adjust = true);
+                $value = \Frick\Request\Adjust::$type($value, $adjust = true);
             }
         }
 

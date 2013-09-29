@@ -1,6 +1,6 @@
 <?php
 
-namespace Frick\FBA\Request;
+namespace Frick\Request;
 
 // das richtige
 // das berichtigte
