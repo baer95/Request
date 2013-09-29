@@ -2,31 +2,119 @@
 
 namespace Frick\FBA\Request;
 
-// Bei erfolgreicher Prüfung:
-//      return $i;
-// Bei fehlgeschlagener Prüfung:
-//      berichtigt:     return $i;
-//      unberichtigt:   return null;
+// das richtige
+// das berichtigte
+// oder null
 
 class Adjust
 {
-    public static function REQUEST_USERNAME($i, $adjust = true)
+    /**
+     * REQUEST_BOOL
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
+    public static function REQUEST_BOOL($input, $adjust = true)
     {
-        // Bedingungen für Usernames
-        // 1. kein whitespace
-        // 2. keine Sonderzeichen
-        // 3. erlaubt:
-        //      kleinbuchstaben
-        //      großbuchstaben
-        //      0-9
-        //      punkt (.) und unterstrich (_)
-        return $i;
+        if (is_bool($input)) {
+            return $input;
+        } elseif ($adjust) {
+            return (bool) $input;
+        } else {
+            return null;
+        }
     }
-    public static function REQUEST_PASSWORD($i, $adjust = true)
+
+    /**
+     * REQUEST_JSON
+     *
+     * If you are worried about the Content of the JSON-Array, simply json_decode() it and set as a userDefinedArray.
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
+    public static function REQUEST_JSON($input, $adjust = true)
     {
-        // Im Prinzip alles erlaubt, wird ja sowieso vor der Speicherung verschlüsselt!
-        return $i;
+        json_decode($input);
+        if (json_last_error() === JSON_ERROR_NONE) {
+            return $input;
+        } elseif ($adjust) {
+            return "{\r\t\"ErrorCode\": ".json_last_error().",\r\t\"ErrorMessage\": \"".json_last_error_msg()."\"\r}";
+        } else {
+            return null;
+        }
     }
+
+    /**
+     * REQUEST_INT
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
+    public static function REQUEST_INT($input, $adjust = true)
+    {
+        if (is_int($input)) {
+            return $input;
+        } elseif ($adjust) {
+            return (int) $input;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * REQUEST_PASSWORD
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The crypted or untouched input-value.
+     */
+    public static function REQUEST_PASSWORD($input, $adjust = true)
+    {
+        if ($adjust) {
+            return password_hash($input, PASSWORD_DEFAULT, ["cost" => 12]);
+        } else {
+            return $input;
+        }
+    }
+
+    /**
+     * REQUEST_USERNAME
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
+    public static function REQUEST_USERNAME($input, $adjust = true)
+    {
+        $usernameRegex = "/^[a-zA-Z\d\.\-\_@]{8,}$/i";
+        $usernameReplaceRegex = "/[^a-zA-Z\d\.\-\_@]+/i";
+        $match = preg_match($usernameRegex, $input);
+        if ($match === 1) {
+            return $input;
+        } elseif ($match === 0) {
+            if ($adjust) {
+                return mb_strtolower(preg_replace($usernameReplaceRegex, "", $input));
+            } else {
+                return null;
+            }
+        } else {
+            throw new \Exception("Syntax Error in Regular Expression.", 1);
+        }
+    }
+
+    // ########################################################
+
+    /**
+     * REQUEST_EMAIL
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
     public static function REQUEST_EMAIL($i, $adjust = true)
     {
         // Was erlaubt ist, is ja eigentlich eh klar, was die definition einer E-Mail-Addresse halt vorgibt!
@@ -49,6 +137,14 @@ class Adjust
             throw new \Exception("Sxntax Error in Regular Expression.", 1);
         }
     }
+
+    /**
+     * REQUEST_STRING
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
     public static function REQUEST_STRING($i, $adjust = true)
     {
         // Tags entfernen
@@ -56,38 +152,40 @@ class Adjust
         // anführungszeichen escapen
         // ...
     }
-    public static function REQUEST_BOOL($i, $adjust = true)
-    {
-        // eigentlich ja fast alles egal, da ja nur true oder false sein kann (Funktionalität von is_bool überprüfen!)
-        if (is_bool($i)) {
-            return $i;
-        } elseif ($adjust) {
-            return (bool) $i;
-        } else {
-            return null;
-        }
-    }
-    public static function REQUEST_INT($i, $adjust = true)
-    {
-        // Unkompliziert, da ein int ja nicht wirklich probleme macht (Funktionaliät von is_int überprüfen!).
-        if (is_int($i)) {
-            return $i;
-        } elseif ($adjust) {
-            return (int) $i;
-        } else {
-            return null;
-        }
-    }
+
+    /**
+     * REQUEST_NUMERIC
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
     public static function REQUEST_NUMERIC($i, $adjust = true)
     {
         // Numeric: Zahl, die als string codiert ist.
         // Was hier zu tun ist muss ich erst herausfinden...
     }
+
+    /**
+     * REQUEST_FLOAT
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
     public static function REQUEST_FLOAT($i, $adjust = true)
     {
         // eigentlich problemlos, da ein FLOAT ja definiert und überprüfbar ist.
         // überprüfen ob is_float genügt, was tun beim berichtigen?
     }
+
+    /**
+     * REQUEST_IPv4
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
     public static function REQUEST_IPv4($input, $adjust = true)
     {
         // Definition etwas kompliziert und schwer zu überprüfen, wenn auf einen Port auch geachtet werden soll...
@@ -130,6 +228,14 @@ class Adjust
             return false;
         }
     }
+
+    /**
+     * REQUEST_IPv6
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
     public static function REQUEST_IPv6($input, $adjust = true)
     {
         // Definition SEHR kompliziert und schwer zu überprüfen...
@@ -146,19 +252,14 @@ class Adjust
             return false;
         }
     }
-    public static function REQUEST_JSON($input, $adjust = true)
-    {
-        // Wenn der Inhalt des Arrays sorgen bereitet, dann soll dieser doch einfach zu einem Array gemacht werden und durch die anderen parsing-Funktionen überprüft werden.
 
-        json_decode($input);
-        if (json_last_error() === JSON_ERROR_NONE) {
-            return $input;
-        } elseif ($adjust) {
-            return "{\r\t\"ErrorCode\": ".json_last_error().",\r\t\"ErrorMessage\": \"".json_last_error_msg()."\"\r}";
-        } else {
-            return false;
-        }
-    }
+    /**
+     * REQUEST_FILENAME
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
     public static function REQUEST_FILENAME($i, $adjust = true)
     {
         // Welche zeichen sind in Windows/OSX/UNIX verboten?
@@ -167,13 +268,38 @@ class Adjust
         //      UNIX:       ?
         // Hier auch tags entfernen und sonderzeichen kodieren?
     }
-    public static function REQUEST_MIME($i, $adjust = true)
+
+    /**
+     * REQUEST_MIME
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
+    public static function REQUEST_MIME($input, $adjust = true)
     {
-        // Mime-Typen sind definiert, eventuell mit liste vergleichen?
-        // Syntax nicht allzukompliziert... regex verwenden?
-        // sonst tags entfernen, anführungszeichen entfernen, sonderzeichen (ausser [/-]) entfernen
         $mimeRegex = "/^[a-z\d]+[\/]{1}[a-z]{1}[a-z\d\.-]+$/i";
+        $match = preg_match($mimeRegex, $input);
+        if ($match === 1) {
+            return $input;
+        } elseif ($match === 0) {
+            if ($adjust) {
+                // berichtigen? wie?
+            } else {
+                return null;
+            }
+        } else {
+            throw new \Exception("Syntax Error in Regular Expression.", 1);
+        }
     }
+
+    /**
+     * REQUEST_FILESIZE
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
     public static function REQUEST_FILESIZE($i, $adjust = true)
     {
         // sollte ein INT sein, was tun wenn byte o.ä. am ende dabei steht (string)?
@@ -186,28 +312,61 @@ class Adjust
             return false;
         }
     }
+
+    /**
+     * REQUEST_WEBPATH
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
     public static function REQUEST_WEBPATH($i, $adjust = true)
     {
         // Welche Zeichen dürfen in einem Webpath/Domain vorhanden sein? (auf zeichenkodierung achten: leer -> %20 usw.)
         // Auf korrektheit mit protokoll usw. kontrollieren?
         // Ähnliche Bedingungen wie bei Filename???
     }
+
+    /**
+     * REQUEST_FSPATH
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
     public static function REQUEST_FSPATH($i, $adjust = true)
     {
         // Filesystem-Pfade haben meistens laufwerksbuchstaben oder ./ oder ../
         // gleiche bedingungen wie bei filename???
+        return $i;
     }
+
+    /**
+     * REQUEST_ARRAY
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
     public static function REQUEST_ARRAY($i, $adjust = true)
     {
         // Prüft nur ob $i ein array im sinne von PHP ist, wenn inhalt gefahr darstellen könnte, dann einfach als user-defined array angeben und werte parsen.
         if (is_array($i)) {
             return $i;
         } elseif ($adjust) {
-            return array();
+            return array($i);
         } else {
             return false;
         }
     }
+
+    /**
+     * REQUEST_BINARY
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
     public static function REQUEST_BINARY($i, $adjust = true)
     {
         // Ist diese Funktion sinnvoll?

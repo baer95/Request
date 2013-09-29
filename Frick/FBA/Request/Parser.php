@@ -3,7 +3,9 @@
 namespace Frick\FBA\Request;
 
 /**
- * Parser-Class
+ * This class blablabla.
+ *
+ * @author Bernhard Frick <bernhard.frick@gmx.at>
  */
 class Parser
 {

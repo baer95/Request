@@ -6,15 +6,16 @@
         <link rel="stylesheet" type="text/css" href="css/custom.css">
     </head>
     <body>
-<?php
+        <div class="container">
+            <pre><?php
 
 $array = array(
-    "username" => "b.frick",
-    "password" => "91fri173",
+    "username" => "abc ABC ß 1234567890 ,;.:-_ !? ^° \"'`´ §$%& (){}[] ~ +-*:/=",
+    // "password" => "91fri173",
     "email" => "bernard.frick@gmx.at",
     "string" => "1234567890ß´!§$%&/()=?`²³{[]}\"",
-    "bool" => "",
-    "int" => 123,
+    "bool" => 1,
+    "int" => 123.2,
     "numeric" => "123",
     "float" => 1.25,
     "ipv4" => "85.124.157.100:80",
@@ -32,9 +33,31 @@ $array = array(
 foreach ($array as $key => $value) {
     $_GET[$key] = $value;
     $_POST[$key] = $value;
+    $_COOKIE[$key] = $value;
 }
 
 $a = new \Frick\FBA\Request\Parser();
+
+$a->addUserDefinedArray("testing", $array);
+
+$a->setUserVarType("testing", "username", REQUEST_USERNAME)
+  ->setUserVarType("testing", "password", REQUEST_PASSWORD)
+  ->setUserVarType("testing", "email", REQUEST_EMAIL)
+  ->setUserVarType("testing", "string", REQUEST_STRING)
+  ->setUserVarType("testing", "bool", REQUEST_BOOL)
+  ->setUserVarType("testing", "int", REQUEST_INT)
+  ->setUserVarType("testing", "numeric", REQUEST_NUMERIC)
+  ->setUserVarType("testing", "float", REQUEST_FLOAT)
+  ->setUserVarType("testing", "ipv4", REQUEST_IPv4)
+  ->setUserVarType("testing", "ipv6", REQUEST_IPv6)
+  ->setUserVarType("testing", "json", REQUEST_JSON)
+  ->setUserVarType("testing", "filename", REQUEST_FILENAME)
+  ->setUserVarType("testing", "mime", REQUEST_MIME)
+  ->setUserVarType("testing", "filesize", REQUEST_FILESIZE)
+  ->setUserVarType("testing", "webpath", REQUEST_WEBPATH)
+  ->setUserVarType("testing", "fspath", REQUEST_FSPATH)
+  ->setUserVarType("testing", "array", REQUEST_ARRAY)
+  ->setUserVarType("testing", "binary", REQUEST_BINARY);
 
 $a->setGetVarType("username", REQUEST_USERNAME)
   ->setGetVarType("password", REQUEST_PASSWORD)
@@ -74,26 +97,24 @@ $a->setPostVarType("username", REQUEST_USERNAME)
   ->setPostVarType("array", REQUEST_ARRAY)
   ->setPostVarType("binary", REQUEST_BINARY);
 
-$a->addUserDefinedArray("testing", $array);
-
-$a->setUserVarType("testing", "username", REQUEST_USERNAME)
-  ->setUserVarType("testing", "password", REQUEST_PASSWORD)
-  ->setUserVarType("testing", "email", REQUEST_EMAIL)
-  ->setUserVarType("testing", "string", REQUEST_STRING)
-  ->setUserVarType("testing", "bool", REQUEST_BOOL)
-  ->setUserVarType("testing", "int", REQUEST_INT)
-  ->setUserVarType("testing", "numeric", REQUEST_NUMERIC)
-  ->setUserVarType("testing", "float", REQUEST_FLOAT)
-  ->setUserVarType("testing", "ipv4", REQUEST_IPv4)
-  ->setUserVarType("testing", "ipv6", REQUEST_IPv6)
-  ->setUserVarType("testing", "json", REQUEST_JSON)
-  ->setUserVarType("testing", "filename", REQUEST_FILENAME)
-  ->setUserVarType("testing", "mime", REQUEST_MIME)
-  ->setUserVarType("testing", "filesize", REQUEST_FILESIZE)
-  ->setUserVarType("testing", "webpath", REQUEST_WEBPATH)
-  ->setUserVarType("testing", "fspath", REQUEST_FSPATH)
-  ->setUserVarType("testing", "array", REQUEST_ARRAY)
-  ->setUserVarType("testing", "binary", REQUEST_BINARY);
+$a->setCookieVarType("username", REQUEST_USERNAME)
+  ->setCookieVarType("password", REQUEST_PASSWORD)
+  ->setCookieVarType("email", REQUEST_EMAIL)
+  ->setCookieVarType("string", REQUEST_STRING)
+  ->setCookieVarType("bool", REQUEST_BOOL)
+  ->setCookieVarType("int", REQUEST_INT)
+  ->setCookieVarType("numeric", REQUEST_NUMERIC)
+  ->setCookieVarType("float", REQUEST_FLOAT)
+  ->setCookieVarType("ipv4", REQUEST_IPv4)
+  ->setCookieVarType("ipv6", REQUEST_IPv6)
+  ->setCookieVarType("json", REQUEST_JSON)
+  ->setCookieVarType("filename", REQUEST_FILENAME)
+  ->setCookieVarType("mime", REQUEST_MIME)
+  ->setCookieVarType("filesize", REQUEST_FILESIZE)
+  ->setCookieVarType("webpath", REQUEST_WEBPATH)
+  ->setCookieVarType("fspath", REQUEST_FSPATH)
+  ->setCookieVarType("array", REQUEST_ARRAY)
+  ->setCookieVarType("binary", REQUEST_BINARY);
 
 $a->parse_USER()
   ->parse_GET()
@@ -103,7 +124,45 @@ $a->parse_USER()
 
 $parsedArray = $a->getUserDefinedArray("testing");
 
+foreach ($array as $key => $value) {
+    echo $key.":\n";
+    echo "\tInput:  ".gettype($value)." ".$value."\n";
+    echo "\tUDA:    ".gettype($parsedArray[$key])." ".$parsedArray[$key]."\n";
+    echo "\tPOST:   ".gettype($_POST[$key])." ".$_POST[$key]."\n";
+    echo "\tGET:    ".gettype($_GET[$key])." ".$_GET[$key]."\n";
+    echo "\tCOOKIE: ".gettype($_COOKIE[$key])." ".$_COOKIE[$key]."\n\n";
+}
 
-?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ?></pre>
+        </div>
     </body>
 </html>
