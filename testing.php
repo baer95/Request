@@ -12,7 +12,7 @@
 $array = array(
     "username" => "abc ABC ß 1234567890 ,;.:-_ !? ^° \"'`´ §$%& (){}[] ~ +-*:/=",
     // "password" => "91fri173",
-    "email" => "bernard.frick@gmx.at",
+    "email" => "bernard. frick@gmx.at",
     "string" => "1234567890ß´!§$%&/()=?`²³{[]}\"",
     "bool" => 1,
     "int" => 123.2,
@@ -124,29 +124,18 @@ $a->parse_USER()
 
 $parsedArray = $a->getUserDefinedArray("testing");
 
-foreach ($array as $key => $value) {
-    echo $key.":\n";
-    echo "\tInput:  ".gettype($value)." ".$value."\n";
-    echo "\tUDA:    ".gettype($parsedArray[$key])." ".$parsedArray[$key]."\n";
-    echo "\tPOST:   ".gettype($_POST[$key])." ".$_POST[$key]."\n";
-    echo "\tGET:    ".gettype($_GET[$key])." ".$_GET[$key]."\n";
-    echo "\tCOOKIE: ".gettype($_COOKIE[$key])." ".$_COOKIE[$key]."\n\n";
-}
+// foreach ($array as $key => $value) {
+//     echo $key.":\n";
+//     echo "\tInput:  ".gettype($value)." ".$value."\n";
+//     echo "\tUDA:    ".gettype($parsedArray[$key])." ".$parsedArray[$key]."\n";
+//     echo "\tPOST:   ".gettype($_POST[$key])." ".$_POST[$key]."\n";
+//     echo "\tGET:    ".gettype($_GET[$key])." ".$_GET[$key]."\n";
+//     echo "\tCOOKIE: ".gettype($_COOKIE[$key])." ".$_COOKIE[$key]."\n\n";
+// }
 
+// echo gettype($parsedArray["email"])."\n";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+print_r($parsedArray["email"]);
 
 
 
