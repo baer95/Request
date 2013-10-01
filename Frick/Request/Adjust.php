@@ -111,6 +111,11 @@ class Adjust
     /**
      * REQUEST_EMAIL
      *
+     * The E-Mail Syntax is defined by RFC822 and RFC5321 which can be found here:
+     *
+     * @see http://tools.ietf.org/html/rfc822
+     * @see http://tools.ietf.org/html/rfc5321
+     *
      * @param   mixed   $input  The Value that should be parsed.
      * @param   boolean $adjust Should the value be corrected to match the type?
      * @return                  The input-value or null.
@@ -128,6 +133,7 @@ class Adjust
                 //
                 // berichtigen mit Hilfe von $matches
                 //
+                return $matches;
             } else {
                 return null;
             }
