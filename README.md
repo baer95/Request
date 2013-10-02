@@ -17,6 +17,7 @@ Currently available are the following Input-Types:
 
 * Username - `REQUEST_USERNAME`
 * Password - `REQUEST_PASSWORD`
+* Name - `REQUEST_NAME`
 * E-Mail - `REQUEST_EMAIL`
 * String - `REQUEST_STRING`
 * Boolean - `REQUEST_BOOL`
@@ -87,8 +88,37 @@ require_once("path/to/your/project/lib/Frick/Request/Adjust.php");
 Usage
 -----
 
+###GET, POST, COOKIE
+
+To use the Parser just follow the example below:
+
+```php
+<?php
+
+  // Simulate some input-data...
+$_GET['id'] = 34;
+$_POST['firstname'] = 'John';
+$_POST['lastname'] = 'Doe';
+$_COOKIE['lastlogin'] = 1380747874;
+
+$parser = new \Frick\Request\Parser();
+
+$parser->setGetVarType('id', REQUEST_INT);
+$parser->setPostVarType('firstname', REQUEST_NAME);
+$parser->setPostVarType('lastname', REQUEST_NAME);
+$parser->setCookieVarType('lastlogin', REQUEST_INT);
+
+?>
+```
+
+The parsed and corrected values are now accessible at their original place.
+
+###FILES
 
 
+
+
+###User-defined arrays
 
 
 
