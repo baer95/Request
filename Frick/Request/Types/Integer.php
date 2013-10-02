@@ -2,11 +2,11 @@
 
 namespace Frick\Request\Types;
 
-class Boolean extends Type
+class Integer extends Type
 {
     public function checkValue()
     {
-        if (is_bool($this->value)) {
+        if (is_int($this->value)) {
             $this->match = true;
         } else {
             $this->match = false;
@@ -16,7 +16,7 @@ class Boolean extends Type
     public function correctValue()
     {
         if (!$this->match && $this->doCorrection) {
-            $this->value = (bool) $this->value;
+            $this->value = (int) $this->value;
         }
         return $this;
     }

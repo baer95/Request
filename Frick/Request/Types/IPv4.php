@@ -2,11 +2,13 @@
 
 namespace Frick\Request\Types;
 
-class Boolean extends Type
+class IPv4 extends Type
 {
     public function checkValue()
     {
-        if (is_bool($this->value)) {
+        if (
+            // IPv4-Check
+            ) {
             $this->match = true;
         } else {
             $this->match = false;
@@ -16,7 +18,7 @@ class Boolean extends Type
     public function correctValue()
     {
         if (!$this->match && $this->doCorrection) {
-            $this->value = (bool) $this->value;
+            // $this->value korrigieren
         }
         return $this;
     }

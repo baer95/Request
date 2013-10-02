@@ -12,6 +12,8 @@ interface TypeInterface
     public function getDoCorrection();
 
     public function checkValue();
+    public function correctValue();
+    public function parseValue();
 
     public function getMatch();
 }

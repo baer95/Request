@@ -2,6 +2,8 @@
 
 namespace Frick\Request\Types;
 
+require("TypeInterface.php");
+
 abstract class Type implements TypeInterface
 {
     public $value = null;
@@ -38,6 +40,17 @@ abstract class Type implements TypeInterface
     }
 
     abstract public function checkValue();
+
+    abstract public function correctValue();
+
+    public function parseValue()
+    {
+        $this->checkValue();
+        if ($this->doCorrection) {
+            $this->correctValue();
+        }
+        return $this;
+    }
 
     public function getMatch()
     {

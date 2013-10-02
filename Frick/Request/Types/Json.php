@@ -2,11 +2,12 @@
 
 namespace Frick\Request\Types;
 
-class Boolean extends Type
+class Json extends Type
 {
     public function checkValue()
     {
-        if (is_bool($this->value)) {
+        json_decode($this->value);
+        if (json_last_error() === JSON_ERROR_NONE) {
             $this->match = true;
         } else {
             $this->match = false;
@@ -16,7 +17,7 @@ class Boolean extends Type
     public function correctValue()
     {
         if (!$this->match && $this->doCorrection) {
-            $this->value = (bool) $this->value;
+            // $this->value korrigieren.
         }
         return $this;
     }
