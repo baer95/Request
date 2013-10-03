@@ -108,6 +108,10 @@ $parser->setPostVarType('firstname', REQUEST_NAME);
 $parser->setPostVarType('lastname', REQUEST_NAME);
 $parser->setCookieVarType('lastlogin', REQUEST_INT);
 
+$parser->parse_GET();
+$parser->parse_POST();
+$parser->parse_COOKIE();
+
 ?>
 ```
 
@@ -115,20 +119,91 @@ The parsed and corrected values are now accessible at their original place.
 
 ###FILES
 
+The parsing of the `$_FILES`-Array is preconfigured, as there are always the five same Value-Types for every file-array.
 
+```php
+<?php
 
+$parser->parse_FILES();
+
+?>
+```
+
+You can turn off the parsing of the `$_FILES`-Array by using the following:
+
+```php
+<?php
+
+$parser->setParseFilesArray(false);
+
+?>
+```
 
 ###User-defined arrays
 
+Sometimes it may come to the case, that you might want to parse values that are not stored in one of the REQUEST-Arrays.
+Threfore, you can use the parsing of User-Defined Arrays.
+
+You only need to specify a key, under which your array will be stored for parsing.
+You can also specify multiple arrays to be parsed.
+The key you specify is also used to retrieve your parsed array.
+
+```php
+<?php
+
+$arrayToBeParsed = array(
+  'someString' => 'Hello, my name is John Doe.',
+  'someInteger' => 93845,
+  'somePassword' => 'myLittleSecret'
+);
+
+$parser->setUserDefinedArray('someData', $arrayToBeParsed);
+
+$parser->parse_USER();
+
+$parsedArray = $parser->getUserDefinedArray('someData');
+
+?>
+```
+
+###parsing all REQUEST-Arrays at once
+
+Instead of writing:
+```php
+<?php
+
+$parser->parse_USER();
+$parser->parse_GET();
+$parser->parse_POST();
+$parser->parse_COOKIE();
+$parser->parse_FILES();
+
+?>
+```
+
+You can also just write:
+
+```php
+<?php
+
+$parser->parse_ALL();
+
+?>
+```
+
+Which is the same.
 
 
+###Support for method-chaining
 
+Every Setter- and Parser-Method is configured to return the current instance,
+so that method-chaining can be used and setting multiple Value-Types becomes more clearly.
 
+```php
+<?php
 
+$parser->setGetVarType('id', REQUEST_NUMERIC)
+       ->parse_GET();
 
-
-
-
-
-
-
+?>
+```
