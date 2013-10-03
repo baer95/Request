@@ -5,6 +5,7 @@ namespace Frick\Request;
 /**
  * This class blablabla.
  *
+ *
  * @author Bernhard Frick <bernhard.frick@gmx.at>
  */
 class Parser
@@ -191,9 +192,9 @@ class Parser
      * Set whether the $_FILES-Array should be parsed or not. The default value is true.
      * @param   (bool)  $boolean    Set whether the $_FILES-Array should be parsed.
      */
-    public function setParseFilesArray( (bool) $boolean)
+    public function setParseFilesArray($boolean = null)
     {
-        $this->parseFilesArray = $boolean;
+        $this->parseFilesArray = (bool) $boolean;
         return $this;
     }
 

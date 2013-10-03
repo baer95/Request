@@ -11,9 +11,9 @@
 
 $array = array(
     "username" => "abc ABC ß 1234567890 ,;.:-_ !? ^° \"'`´ §$%& (){}[] ~ +-*:/=",
-    // "password" => "91fri173",
+    // "password" => "myLittleSecret",
     "email" => "bernard. frick@gmx.at",
-    "email_dns" => "bernhard.frick@blablahpenisllala.cc",
+    "email_dns" => "bernhard.frick@blablahtestingllala.cc",
     "name" => "aAäÄöÖüÜß-",
     "string" => "1234567890ß´!§$%&/()=?`²³{[]}\"",
     "bool" => 1,
