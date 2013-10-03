@@ -17,6 +17,8 @@ class Parser
     private $cookieVarTypes = array();
     private $filesVarTypes = array();
 
+    private $parseFilesArray = true;
+
     private $classConstants = array();
 
     /**
@@ -186,6 +188,16 @@ class Parser
     }
 
     /**
+     * Set whether the $_FILES-Array should be parsed or not. The default value is true.
+     * @param   (bool)  $boolean    Set whether the $_FILES-Array should be parsed.
+     */
+    public function setParseFilesArray( (bool) $boolean)
+    {
+        $this->parseFilesArray = $boolean;
+        return $this;
+    }
+
+    /**
      * This Method walks through an Array and parses the Values using the Adjust-Class to match the given Types.
      * @param   array   $Array  //
      * @return  object          The Instance that is currently worked on. Used for Method-Chaining.
@@ -254,8 +266,10 @@ class Parser
      */
     public function parse_FILES()
     {
-        foreach ($_FILES as $tagName => &$fileArray) {
-            $fileArray = $this->parse($fileArray, $this->filesVarTypes);
+        if ($this->parseFilesArray) {
+            foreach ($_FILES as $tagName => &$fileArray) {
+                $fileArray = $this->parse($fileArray, $this->filesVarTypes);
+            }
         }
         return $this;
     }
@@ -267,6 +281,7 @@ class Parser
      */
     public function parse_ALL()
     {
+        $this->parse_USER();
         $this->parse_GET();
         $this->parse_POST();
         $this->parse_COOKIE();

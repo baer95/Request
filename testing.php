@@ -13,6 +13,8 @@ $array = array(
     "username" => "abc ABC ß 1234567890 ,;.:-_ !? ^° \"'`´ §$%& (){}[] ~ +-*:/=",
     // "password" => "91fri173",
     "email" => "bernard. frick@gmx.at",
+    "email_dns" => "bernhard.frick@blablahpenisllala.cc",
+    "name" => "aAäÄöÖüÜß-",
     "string" => "1234567890ß´!§$%&/()=?`²³{[]}\"",
     "bool" => 1,
     "int" => 123.2,
@@ -20,13 +22,13 @@ $array = array(
     "float" => 1.25,
     "ipv4" => "85.124.157.100:80",
     "ipv6" => "",
-    "json" => '{"Herausgeber":"Xema","Nummer":"1234-5678-9012-3456","Deckung":2e+6,"Währung":"EURO","Inhaber":{"Name":"Mustermann","Vorname":"Max","männlich":true,"Hobbys":["Reiten","Golfen","Lesen"],"Alter":42,"Kinder":[],"Partner":null}}',
+    // "json" => '{"Herausgeber":"Xema","Nummer":"1234-5678-9012-3456","Deckung":2e+6,"Währung":"EURO","Inhaber":{"Name":"Mustermann","Vorname":"Max","männlich":true,"Hobbys":["Reiten","Golfen","Lesen"],"Alter":42,"Kinder":[],"Partner":null}}',
     "filename" => "testing.pdf",
     "mime" => "application/pdf",
     "filesize" => 3467687,
     "webpath" => "",
     "fspath" => "D:/Dropbox/wwwroot/Request/testing.php",
-    "array" => array("key" => "value"),
+    // "array" => array("key" => "value"),
     "binary" => "0bf8er4u84984444443tjß98fjtcg2349ß8htn3öt9omqtj"
 );
 
@@ -43,6 +45,8 @@ $a->addUserDefinedArray("testing", $array);
 $a->setUserVarType("testing", "username", REQUEST_USERNAME)
   ->setUserVarType("testing", "password", REQUEST_PASSWORD)
   ->setUserVarType("testing", "email", REQUEST_EMAIL)
+  ->setUserVarType("testing", "email_dns", REQUEST_EMAIL_DNS)
+  ->setUserVarType("testing", "name", REQUEST_NAME)
   ->setUserVarType("testing", "string", REQUEST_STRING)
   ->setUserVarType("testing", "bool", REQUEST_BOOL)
   ->setUserVarType("testing", "int", REQUEST_INT)
@@ -62,6 +66,8 @@ $a->setUserVarType("testing", "username", REQUEST_USERNAME)
 $a->setGetVarType("username", REQUEST_USERNAME)
   ->setGetVarType("password", REQUEST_PASSWORD)
   ->setGetVarType("email", REQUEST_EMAIL)
+  ->setGetVarType("email_dns", REQUEST_EMAIL_DNS)
+  ->setGetVarType("name", REQUEST_NAME)
   ->setGetVarType("string", REQUEST_STRING)
   ->setGetVarType("bool", REQUEST_BOOL)
   ->setGetVarType("int", REQUEST_INT)
@@ -81,6 +87,8 @@ $a->setGetVarType("username", REQUEST_USERNAME)
 $a->setPostVarType("username", REQUEST_USERNAME)
   ->setPostVarType("password", REQUEST_PASSWORD)
   ->setPostVarType("email", REQUEST_EMAIL)
+  ->setPostVarType("email_dns", REQUEST_EMAIL_DNS)
+  ->setPostVarType("name", REQUEST_NAME)
   ->setPostVarType("string", REQUEST_STRING)
   ->setPostVarType("bool", REQUEST_BOOL)
   ->setPostVarType("int", REQUEST_INT)
@@ -100,6 +108,8 @@ $a->setPostVarType("username", REQUEST_USERNAME)
 $a->setCookieVarType("username", REQUEST_USERNAME)
   ->setCookieVarType("password", REQUEST_PASSWORD)
   ->setCookieVarType("email", REQUEST_EMAIL)
+  ->setCookieVarType("email_dns", REQUEST_EMAIL_DNS)
+  ->setCookieVarType("name", REQUEST_NAME)
   ->setCookieVarType("string", REQUEST_STRING)
   ->setCookieVarType("bool", REQUEST_BOOL)
   ->setCookieVarType("int", REQUEST_INT)
@@ -124,18 +134,20 @@ $a->parse_USER()
 
 $parsedArray = $a->getUserDefinedArray("testing");
 
-// foreach ($array as $key => $value) {
-//     echo $key.":\n";
-//     echo "\tInput:  ".gettype($value)." ".$value."\n";
-//     echo "\tUDA:    ".gettype($parsedArray[$key])." ".$parsedArray[$key]."\n";
-//     echo "\tPOST:   ".gettype($_POST[$key])." ".$_POST[$key]."\n";
-//     echo "\tGET:    ".gettype($_GET[$key])." ".$_GET[$key]."\n";
-//     echo "\tCOOKIE: ".gettype($_COOKIE[$key])." ".$_COOKIE[$key]."\n\n";
-// }
+foreach ($array as $key => $value) {
+    echo $key.":\n";
+    echo "\tInput:  ".gettype($value)." ".$value."\n";
+    echo "\tUDA:    ".gettype($parsedArray[$key])." ".$parsedArray[$key]."\n";
+    echo "\tPOST:   ".gettype($_POST[$key])." ".$_POST[$key]."\n";
+    echo "\tGET:    ".gettype($_GET[$key])." ".$_GET[$key]."\n";
+    echo "\tCOOKIE: ".gettype($_COOKIE[$key])." ".$_COOKIE[$key]."\n\n";
+}
 
 // echo gettype($parsedArray["email"])."\n";
 
-print_r($parsedArray["email"]);
+// print_r($parsedArray["email"]);
+
+
 
 
 
