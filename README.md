@@ -15,25 +15,27 @@ The Parser-Class is used to set the Types for Input-Values and to walk through t
 
 Currently available are the following Input-Types:
 
-* Username - `REQUEST_USERNAME`
-* Password - `REQUEST_PASSWORD`
-* Name - `REQUEST_NAME`
-* E-Mail - `REQUEST_EMAIL`
-* String - `REQUEST_STRING`
+* Array - `REQUEST_ARRAY`
+* Binary - `REQUEST_BINARY`
 * Boolean - `REQUEST_BOOL`
-* Integer - `REQUEST_INT`
-* Numeric - `REQUEST_NUMERIC`
+* Email - `REQUEST_EMAIL`
+* Email with Domain-Check - `REQUEST_EMAIL_DNS`
+* Filename - `REQUEST_FILENAME`
+* Filesize - `REQUEST_FILESIZE`
 * Float - `REQUEST_FLOAT`
+* Filesystem-Path - `REQUEST_FSPATH`
+* HTML - `REQUEST_HTML`
+* Integer - `REQUEST_INT`
 * IPv4 - `REQUEST_IPv4`
 * IPv6 - `REQUEST_IPv6`
 * JSON-Array - `REQUEST_JSON`
-* Filename - `REQUEST_FILENAME`
-* Mime-Type - `REQUEST_MIME`
-* Filesize -`REQUEST_FILESIZE`
+* MIME-Type - `REQUEST_MIME`
+* Name - `REQUEST_NAME`
+* Numeric - `REQUEST_NUMERIC`
+* Password - `REQUEST_PASSWORD`
+* String - `REQUEST_STRING`
+* Username - `REQUEST_USERNAME`
 * Webpath - `REQUEST_WEBPATH`
-* Filesystem-Path - `REQUEST_FSPATH`
-* PHP-Array - `REQUEST_ARRAY`
-* Binary-Files - `REQUEST_BINARY`
 
 ###Adjust
 
