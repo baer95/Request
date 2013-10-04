@@ -205,6 +205,7 @@ so that method-chaining can be used and setting multiple Value-Types becomes mor
 <?php
 
 $parser->setGetVarType('id', REQUEST_NUMERIC)
+       ->setGetVarType('type', REQUEST_STIRNG)
        ->parse_GET();
 
 ?>
