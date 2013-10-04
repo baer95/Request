@@ -132,6 +132,44 @@ class Adjust
     }
 
     /**
+     * REQUEST_EMAIL
+     *
+     * The E-Mail Syntax is defined by RFC822 and RFC5321 which can be found here:
+     *
+     * @see http://tools.ietf.org/html/rfc822
+     * @see http://tools.ietf.org/html/rfc5321
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
+    public static function REQUEST_EMAIL($input, $adjust = true)
+    {
+        $emailRegex = "/^[a-zA-Z\d][\w\.-]*[a-zA-Z\d]@[a-zA-Z\d][\w\.-]*\.(?:[a-zA-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|travel|hotel|museum)$/i";
+        $result = preg_match($emailRegex, $input, $matches);
+        if ($result === 1) {
+            return $input;
+        } elseif ($result === 0) {
+            if ($adjust) {
+                // BERICHTIGEN
+                $at = strpos($input, "@");
+                if (is_int($at)) {
+                    // @ existiert
+                    $output = preg_replace("/[^a-zA-Z\d\w\.\-\@]/i", "", $input);
+                } else {
+                    // @ existiert nicht
+                    $output = "john.doe@".preg_replace("/[^a-zA-Z\d\w\.\-\@]/i", "", $input);
+                }
+                return $output;
+            } else {
+                return null;
+            }
+        } else {
+            throw new \Exception("Sxntax Error in Regular Expression.", 1);
+        }
+    }
+
+    /**
      * REQUEST_EMAIL_DNS
      *
      * The E-Mail Syntax is defined by RFC822 and RFC5321 which can be found here:
@@ -159,42 +197,6 @@ class Adjust
     }
 
     // ########################################################
-
-    /**
-     * REQUEST_EMAIL
-     *
-     * The E-Mail Syntax is defined by RFC822 and RFC5321 which can be found here:
-     *
-     * @see http://tools.ietf.org/html/rfc822
-     * @see http://tools.ietf.org/html/rfc5321
-     *
-     * @param   mixed   $input  The Value that should be parsed.
-     * @param   boolean $adjust Should the value be corrected to match the type?
-     * @return                  The input-value or null.
-     */
-    public static function REQUEST_EMAIL($i, $adjust = true)
-    {
-        // Was erlaubt ist, is ja eigentlich eh klar, was die definition einer E-Mail-Addresse halt vorgibt!
-
-        // $filtered = filter_var($i, FILTER_VALIDATE_EMAIL);
-        $emailRegex = "/^[a-zA-Z\d][\w\.-]*[a-zA-Z\d]@[a-zA-Z\d][\w\.-]*\.(?:[a-zA-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|travel|hotel|museum)$/i";
-        $matches = array();
-        $result = preg_match($emailRegex, $i, $matches);
-        if ($result === 0) {
-            if ($adjust) {
-                //
-                // berichtigen mit Hilfe von $matches
-                //
-                return $i;
-            } else {
-                return null;
-            }
-        } elseif ($result === 1) {
-            return $i;
-        } else {
-            throw new \Exception("Sxntax Error in Regular Expression.", 1);
-        }
-    }
 
     /**
      * REQUEST_STRING
