@@ -122,7 +122,7 @@ class Adjust
             return $input;
         } elseif ($match === 0) {
             if ($adjust) {
-                //berichtigen
+                return preg_replace($nameReplaceRegex, "", $input);
             } else {
                 return null;
             }
@@ -181,25 +181,27 @@ class Adjust
      * @param   boolean $adjust Should the value be corrected to match the type?
      * @return                  The input-value or null.
      */
-    public static function REQUEST_EMAIL_DNS($i, $adjust = true)
+    public static function REQUEST_EMAIL_DNS($input, $adjust = true)
     {
-        // Was erlaubt ist, is ja eigentlich eh klar, was die definition einer E-Mail-Addresse halt vorgibt!
-
-        // $filtered = filter_var($i, FILTER_VALIDATE_EMAIL);
         $emailRegex = "/^[a-zA-Z\d][\w\.-]*[a-zA-Z\d]@[a-zA-Z\d][\w\.-]*\.(?:[a-zA-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|travel|hotel|museum)$/i";
-        $matches = array();
-        $result = preg_match($emailRegex, $i, $matches);
-        if ($result === 0) {
+        $result = preg_match($emailRegex, $input);
+        if ($result === 1) {
+            $dnsCheck = checkdnsrr(substr($input, strpos($input, "@")+1), "MX");
+            if ($dnsCheck) {
+                return $input;
+            } else {
+                return false;
+            }
+        } elseif ($result === 0) {
             if ($adjust) {
                 //
-                // berichtigen mit Hilfe von $matches
+                // berichtigen
                 //
-                return $matches;
+                $output = false;
+                return $output;
             } else {
                 return null;
             }
-        } elseif ($result === 1) {
-            return $i;
         } else {
             throw new \Exception("Sxntax Error in Regular Expression.", 1);
         }
