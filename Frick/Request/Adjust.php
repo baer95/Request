@@ -41,7 +41,7 @@ class Adjust
         if (json_last_error() === JSON_ERROR_NONE) {
             return $input;
         } elseif ($adjust) {
-            return "{\r\t\"ErrorCode\": ".json_last_error().",\r\t\"ErrorMessage\": \"".json_last_error_msg()."\"\r}";
+            return "{\"ErrorCode\": ".json_last_error().",\"ErrorMessage\": \"".json_last_error_msg()."\"}";
         } else {
             return null;
         }
@@ -210,6 +210,24 @@ class Adjust
         } elseif ($adjust) {
             $numericReplaceRegex = "/^[^0-9]+$/";
             return preg_replace($numericReplaceRegex, "", $input);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * REQUEST_ARRAY
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
+    public static function REQUEST_ARRAY($input, $adjust = true)
+    {
+        if (is_array($input)) {
+            return $input;
+        } elseif ($adjust) {
+            return array($input);
         } else {
             return null;
         }
@@ -419,24 +437,7 @@ class Adjust
         return $i;
     }
 
-    /**
-     * REQUEST_ARRAY
-     *
-     * @param   mixed   $input  The Value that should be parsed.
-     * @param   boolean $adjust Should the value be corrected to match the type?
-     * @return                  The input-value or null.
-     */
-    public static function REQUEST_ARRAY($i, $adjust = true)
-    {
-        // Prüft nur ob $i ein array im sinne von PHP ist, wenn inhalt gefahr darstellen könnte, dann einfach als user-defined array angeben und werte parsen.
-        if (is_array($i)) {
-            return $i;
-        } elseif ($adjust) {
-            return array($i);
-        } else {
-            return false;
-        }
-    }
+
 
     /**
      * REQUEST_BINARY
