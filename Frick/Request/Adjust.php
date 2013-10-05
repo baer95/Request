@@ -284,8 +284,6 @@ class Adjust
      */
     public static function REQUEST_IPv4($input, $adjust = true)
     {
-        // Definition etwas kompliziert und schwer zu überprüfen, wenn auf einen Port auch geachtet werden soll...
-
         $filtered = filter_var($input, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
 
         if ($filtered !== false) {
@@ -321,7 +319,7 @@ class Adjust
 
             return ($port != null) ? $ip.":".$port : $ip;
         } else {
-            return false;
+            return null;
         }
     }
 
@@ -436,8 +434,6 @@ class Adjust
         // gleiche bedingungen wie bei filename???
         return $i;
     }
-
-
 
     /**
      * REQUEST_BINARY
