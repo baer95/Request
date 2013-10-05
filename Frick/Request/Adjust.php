@@ -132,6 +132,54 @@ class Adjust
     }
 
     /**
+     * REQUEST_IPv4
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
+    public static function REQUEST_IPv4($input, $adjust = true)
+    {
+        $filtered = filter_var($input, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
+
+        if ($filtered !== false) {
+            return $filtered;
+        } elseif ($adjust) {
+            // Separate IP and Port
+            if (stripos($input, ":") !== false) {
+                $ip = stristr($input, ":", true);
+                $port = stristr($input, ":", false);
+            } else {
+                $ip = $input;
+                $port = null;
+            }
+
+            // Trim Whitespace and the ":" off the Port
+            if ($port != null) {
+                $port = (int) trim($port, " :\t\n\r\0\x0B");
+                if ($port < 0) $port = 0;
+                if ($port > 65535) $port = 65535;
+            }
+
+            // Disjoint the four parts of the IP-Adress
+            $parts = explode(".", $ip);
+
+            // Trim eventually existing whitespace off the Parts and typecast them as INT
+            foreach ($parts as $key => &$part) {
+                $part = (int) trim($part);
+                if ($part < 0) $part = 0;
+                if ($part > 255) $part = 255;
+            }
+
+            $ip = join(".", $parts);
+
+            return ($port != null) ? $ip.":".$port : $ip;
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * REQUEST_EMAIL
      *
      * The E-Mail Syntax is defined by RFC822 and RFC5321 which can be found here:
@@ -233,6 +281,8 @@ class Adjust
         }
     }
 
+
+
     // ########################################################
 
     /**
@@ -273,54 +323,6 @@ class Adjust
     {
         // eigentlich problemlos, da ein FLOAT ja definiert und überprüfbar ist.
         // überprüfen ob is_float genügt, was tun beim berichtigen?
-    }
-
-    /**
-     * REQUEST_IPv4
-     *
-     * @param   mixed   $input  The Value that should be parsed.
-     * @param   boolean $adjust Should the value be corrected to match the type?
-     * @return                  The input-value or null.
-     */
-    public static function REQUEST_IPv4($input, $adjust = true)
-    {
-        $filtered = filter_var($input, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
-
-        if ($filtered !== false) {
-            return $filtered;
-        } elseif ($adjust) {
-            // Separate IP and Port
-            if (stripos($input, ":") !== false) {
-                $ip = stristr($input, ":", true);
-                $port = stristr($input, ":", false);
-            } else {
-                $ip = $input;
-                $port = null;
-            }
-
-            // Trim Whitespace and the ":" off the Port
-            if ($port != null) {
-                $port = (int) trim($port, " :\t\n\r\0\x0B");
-                if ($port < 0) $port = 0;
-                if ($port > 65535) $port = 65535;
-            }
-
-            // Disjoint the four parts of the IP-Adress
-            $parts = explode(".", $ip);
-
-            // Trim eventually existing whitespace off the Parts and typecast them as INT
-            foreach ($parts as $key => &$part) {
-                $part = (int) trim($part);
-                if ($part < 0) $part = 0;
-                if ($part > 255) $part = 255;
-            }
-
-            $ip = join(".", $parts);
-
-            return ($port != null) ? $ip.":".$port : $ip;
-        } else {
-            return null;
-        }
     }
 
     /**
