@@ -196,6 +196,25 @@ class Adjust
         }
     }
 
+    /**
+     * REQUEST_NUMERIC
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
+    public static function REQUEST_NUMERIC($input, $adjust = true)
+    {
+        if (is_numeric($input)) {
+            return $input;
+        } elseif ($adjust) {
+            $numericReplaceRegex = "/^[^0-9]+$/";
+            return preg_replace($numericReplaceRegex, "", $input);
+        } else {
+            return null;
+        }
+    }
+
     // ########################################################
 
     /**
@@ -223,19 +242,6 @@ class Adjust
     public static function REQUEST_HTML($i, $adjust = true)
     {
         //
-    }
-
-    /**
-     * REQUEST_NUMERIC
-     *
-     * @param   mixed   $input  The Value that should be parsed.
-     * @param   boolean $adjust Should the value be corrected to match the type?
-     * @return                  The input-value or null.
-     */
-    public static function REQUEST_NUMERIC($i, $adjust = true)
-    {
-        // Numeric: Zahl, die als string codiert ist.
-        // Was hier zu tun ist muss ich erst herausfinden...
     }
 
     /**
