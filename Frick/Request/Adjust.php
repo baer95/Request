@@ -281,6 +281,24 @@ class Adjust
         }
     }
 
+    /**
+     * REQUEST_FLOAT
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
+    public static function REQUEST_FLOAT($input, $adjust = true)
+    {
+        if (is_float($input)) {
+            return $input;
+        } elseif ($adjust) {
+            return (float) $input;
+        } else {
+            return null;
+        }
+    }
+
     // ########################################################
 
     /**
@@ -309,19 +327,6 @@ class Adjust
     public static function REQUEST_HTML5($i, $adjust = true)
     {
         //
-    }
-
-    /**
-     * REQUEST_FLOAT
-     *
-     * @param   mixed   $input  The Value that should be parsed.
-     * @param   boolean $adjust Should the value be corrected to match the type?
-     * @return                  The input-value or null.
-     */
-    public static function REQUEST_FLOAT($i, $adjust = true)
-    {
-        // eigentlich problemlos, da ein FLOAT ja definiert und überprüfbar ist.
-        // überprüfen ob is_float genügt, was tun beim berichtigen?
     }
 
     /**

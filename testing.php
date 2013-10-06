@@ -134,14 +134,14 @@ $a  ->parse_USER()
 
 $parsedArray = $a->getUserDefinedArray("testing");
 
-foreach ($array as $key => $value) {
-    echo $key.":\n";
-    echo "\tInput:  ".gettype($value)." ".$value."\n";
-    echo "\tUDA:    ".gettype($parsedArray[$key])." ".$parsedArray[$key]."\n";
-    echo "\tPOST:   ".gettype($_POST[$key])." ".$_POST[$key]."\n";
-    echo "\tGET:    ".gettype($_GET[$key])." ".$_GET[$key]."\n";
-    echo "\tCOOKIE: ".gettype($_COOKIE[$key])." ".$_COOKIE[$key]."\n\n";
-}
+// foreach ($array as $key => $value) {
+//     echo $key.":\n";
+//     echo "\tInput:  ".gettype($value)." ".$value."\n";
+//     echo "\tUDA:    ".gettype($parsedArray[$key])." ".$parsedArray[$key]."\n";
+//     echo "\tPOST:   ".gettype($_POST[$key])." ".$_POST[$key]."\n";
+//     echo "\tGET:    ".gettype($_GET[$key])." ".$_GET[$key]."\n";
+//     echo "\tCOOKIE: ".gettype($_COOKIE[$key])." ".$_COOKIE[$key]."\n\n";
+// }
 
 // echo gettype($parsedArray["email"])."\n";
 
@@ -151,11 +151,13 @@ foreach ($array as $key => $value) {
 
 
 
+// print_r(get_html_translation_table(HTML_ENTITIES, ENT_QUOTES|ENT_HTML5));
+// Specialchars
+//     &, ", <, >
+// Entities
+//     Alle Zeichen, die nicht im latin-1 (?) vorkommen (kyriles zeugs und so weiter)
 
-
-
-
-
+// htmlentities($string, ENT_QUOTES|ENT_HTML5, 'UTF-8', true);
 
 
 
