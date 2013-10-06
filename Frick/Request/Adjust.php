@@ -281,8 +281,6 @@ class Adjust
         }
     }
 
-
-
     // ########################################################
 
     /**
@@ -294,6 +292,7 @@ class Adjust
      */
     public static function REQUEST_STRING($i, $adjust = true)
     {
+        $output;
         // Tags entfernen
         // sonderzeichen kodieren
         // anführungszeichen escapen
@@ -307,7 +306,7 @@ class Adjust
      * @param   boolean $adjust Should the value be corrected to match the type?
      * @return                  The input-value or null.
      */
-    public static function REQUEST_HTML($i, $adjust = true)
+    public static function REQUEST_HTML5($i, $adjust = true)
     {
         //
     }
