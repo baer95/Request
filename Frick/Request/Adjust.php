@@ -299,6 +299,30 @@ class Adjust
         }
     }
 
+    /**
+     * REQUEST_MIME
+     *
+     * @param   mixed   $input  The Value that should be parsed.
+     * @param   boolean $adjust Should the value be corrected to match the type?
+     * @return                  The input-value or null.
+     */
+    public static function REQUEST_MIME($input, $adjust = true)
+    {
+        $mimeRegex = "/^[a-z\d]+[\/]{1}[a-z]{1}[a-z\d\.-]+$/i";
+        $match = preg_match($mimeRegex, $input);
+        if ($match === 1) {
+            return $input;
+        } elseif ($match === 0) {
+            if ($adjust) {
+                return "multipart";
+            } else {
+                return null;
+            }
+        } else {
+            throw new \Exception("Syntax Error in Regular Expression.", 1);
+        }
+    }
+
     // ########################################################
 
     /**
@@ -367,30 +391,6 @@ class Adjust
         //      OSX:        ?
         //      UNIX:       ?
         // Hier auch tags entfernen und sonderzeichen kodieren?
-    }
-
-    /**
-     * REQUEST_MIME
-     *
-     * @param   mixed   $input  The Value that should be parsed.
-     * @param   boolean $adjust Should the value be corrected to match the type?
-     * @return                  The input-value or null.
-     */
-    public static function REQUEST_MIME($input, $adjust = true)
-    {
-        $mimeRegex = "/^[a-z\d]+[\/]{1}[a-z]{1}[a-z\d\.-]+$/i";
-        $match = preg_match($mimeRegex, $input);
-        if ($match === 1) {
-            return $input;
-        } elseif ($match === 0) {
-            if ($adjust) {
-                // berichtigen? wie?
-            } else {
-                return null;
-            }
-        } else {
-            throw new \Exception("Syntax Error in Regular Expression.", 1);
-        }
     }
 
     /**
