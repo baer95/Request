@@ -2,12 +2,12 @@
 
 namespace Frick\Request\Types;
 
-class Username extends Type
+class Username extends AbstractType
 {
     public function checkValue()
     {
         $usernameRegex = "/^[a-zA-Z\d\.\-\_@]{8,}$/i";
-        $match = preg_match($usernameRegex, $input);
+        $match = preg_match($usernameRegex, $this->value);
         if ($match === 1) {
             $this->match = true;
         } elseif ($match === 0) {

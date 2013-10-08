@@ -2,7 +2,7 @@
 
 namespace Frick\Request\Types;
 
-abstract class Type implements TypeInterface
+abstract class AbstractType implements \Frick\Request\Interfaces\TypeInterface
 {
     public $value = null;
     public $doCorrection = true;

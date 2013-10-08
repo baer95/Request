@@ -2,15 +2,14 @@
 
 namespace Frick\Request\Types;
 
-class FilesystemPath extends Type
+class FilesystemPath extends AbstractType
 {
     public function checkValue()
     {
-        if (
             //Filesystem-Path-Check
             // Filesystem-Pfade haben meistens laufwerksbuchstaben oder ./ oder ../
             // gleiche bedingungen wie bei filename???
-            ) {
+        if (false) {
             $this->match = true;
         } else {
             $this->match = false;

@@ -10,7 +10,6 @@
             <pre><?php
 
 $testing = array(
-    "array" => array("key" => "value"),
     "binary" => "0bf8er4u84984444443tjß98fjtcg2349ß8htn3öt9omqtj",
     "boolean" => true,
     "email" => "bernard.frick@gmx.at",
@@ -33,42 +32,47 @@ $testing = array(
     "webpath" => "http://localhost/Request/index.php",
 );
 
-$_GET = $testing;
-$_POST = $testing;
-$_COOKIE = $testing;
+$_GET = $_POST = $_COOKIE = $testing;
 
 $parser = new \Frick\Request\Parser();
 
-$a->addData("testing", $testing);
+$parser->addData("testing", $testing);
 
-$a->setType("array", new \Frick\Request\Types\Array());
-$a->setType("binary", new \Frick\Request\Types\Binary());
-$a->setType("boolean", new \Frick\Request\Types\Boolean());
-$a->setType("email", new \Frick\Request\Types\Email());
-$a->setType("email_dns", new \Frick\Request\Types\Email_DNS());
-$a->setType("filename", new \Frick\Request\Types\Filename());
-$a->setType("filesize", new \Frick\Request\Types\Filesize());
-$a->setType("filesystemPath", new \Frick\Request\Types\filesystemPath());
-$a->setType("float", new \Frick\Request\Types\Float());
-$a->setType("html5", new \Frick\Request\Types\HTML5());
-$a->setType("integer", new \Frick\Request\Types\Integer());
-$a->setType("ipv4", new \Frick\Request\Types\IPv4());
-$a->setType("ipv6", new \Frick\Request\Types\IPv6());
-$a->setType("json", new \Frick\Request\Types\Json());
-$a->setType("mimeType", new \Frick\Request\Types\MimeType());
-$a->setType("name", new \Frick\Request\Types\Name());
-$a->setType("numeric", new \Frick\Request\Types\Numeric());
-$a->setType("password", new \Frick\Request\Types\Password());
-$a->setType("string", new \Frick\Request\Types\String());
-$a->setType("username", new \Frick\Request\Types\Username());
-$a->setType("webpath", new \Frick\Request\Types\Webpath());
+use Frick\Request\Types as Types;
 
-$a->parse();
+$parser->setType("binary", new Types\Binary());
+$parser->setType("boolean", new Types\Boolean());
+$parser->setType("email", new Types\Email());
+$parser->setType("email_dns", new Types\EmailDNS());
+$parser->setType("filename", new Types\Filename());
+$parser->setType("filesize", new Types\Filesize());
+$parser->setType("filesystemPath", new Types\filesystemPath());
+$parser->setType("float", new Types\Float());
+$parser->setType("html5", new Types\HTML5());
+$parser->setType("integer", new Types\Integer());
+$parser->setType("ipv4", new Types\IPv4());
+$parser->setType("ipv6", new Types\IPv6());
+$parser->setType("json", new Types\Json());
+$parser->setType("mimeType", new Types\MimeType());
+$parser->setType("name", new Types\Name());
+$parser->setType("numeric", new Types\Numeric());
+$parser->setType("password", new Types\Password());
+$parser->setType("string", new Types\String());
+$parser->setType("username", new Types\Username());
+$parser->setType("webpath", new Types\Webpath());
 
-$parsed_GET = $a->getData("_GET");
-$parsed_POST = $a->getData("_POST");
-$parsed_COOKIE = $a->getData("_COOKIE");
-$parsed_testing = $a->getData("testing");
+try {
+    $parser->parse();
+} catch (Exception $e) {
+    echo $e->getMessage();
+    echo $e->getLine();
+    echo $e->getFile();
+}
+
+$parsed_GET = $parser->getData("_GET");
+$parsed_POST = $parser->getData("_POST");
+$parsed_COOKIE = $parser->getData("_COOKIE");
+$parsed_testing = $parser->getData("testing");
 
 foreach ($testing as $key => $value) echo $key.":\n\t".gettype($value)." ".print_r($value, true)."\n\n";
 

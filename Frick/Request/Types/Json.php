@@ -2,7 +2,7 @@
 
 namespace Frick\Request\Types;
 
-class Json extends Type
+class Json extends AbstractType
 {
     public function checkValue()
     {

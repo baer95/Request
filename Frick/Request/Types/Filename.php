@@ -2,18 +2,17 @@
 
 namespace Frick\Request\Types;
 
-class Filename extends Type
+class Filename extends AbstractType
 {
     public function checkValue()
     {
-        if (
             //Filename-Check, auf existenz prüfen?
             //Welche zeichen sind in Windows/OSX/UNIX verboten?
             //      Windows:    \/:*?"<>|
             //      OSX:        ?
             //      UNIX:       ?
             // Hier auch tags entfernen und sonderzeichen kodieren?
-            ) {
+        if (false) {
             $this->match = true;
         } else {
             $this->match = false;

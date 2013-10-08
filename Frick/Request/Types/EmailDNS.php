@@ -2,7 +2,7 @@
 
 namespace Frick\Request\Types;
 
-class Email_DNS extends Type
+class EmailDNS extends AbstractType
 {
     /**
      * The E-Mail Syntax is defined by RFC822 and RFC5321 which can be found here:
@@ -12,7 +12,7 @@ class Email_DNS extends Type
      */
     public function checkValue()
     {
-        $dnsCheck = checkdnsrr(substr($match, strpos($match, "@")+1), "MX");
+        $dnsCheck = checkdnsrr(substr($this->value, strpos($this->value, "@")+1), "MX");
 
         if ($dnsCheck) {
             $this->match = true;

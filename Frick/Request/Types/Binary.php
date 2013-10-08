@@ -2,13 +2,12 @@
 
 namespace Frick\Request\Types;
 
-class Binary extends Type
+class Binary extends AbstractType
 {
     public function checkValue()
     {
-        if (
-            //Binary-Check!
-            ) {
+        //Binary-Check!
+        if (false) {
             $this->match = true;
         } else {
             $this->match = false;

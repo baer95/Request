@@ -2,7 +2,7 @@
 
 namespace Frick\Request\Types;
 
-class Email extends Type
+class Email extends AbstractType
 {
     public function checkValue()
     {

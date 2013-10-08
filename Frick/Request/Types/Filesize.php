@@ -2,14 +2,13 @@
 
 namespace Frick\Request\Types;
 
-class Filesize extends Type
+class Filesize extends AbstractType
 {
     public function checkValue()
     {
-        if (
             //Filesize-Check
             //kann int sein, kann aber auch string sein (2534 bytes usw.)
-            ) {
+        if (false) {
             $this->match = true;
         } else {
             $this->match = false;

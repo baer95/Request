@@ -2,7 +2,7 @@
 
 namespace Frick\Request\Types;
 
-class MimeType extends Type
+class MimeType extends AbstractType
 {
     public function checkValue()
     {

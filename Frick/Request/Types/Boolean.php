@@ -2,7 +2,7 @@
 
 namespace Frick\Request\Types;
 
-class Boolean extends Type
+class Boolean extends AbstractType
 {
     public function checkValue()
     {

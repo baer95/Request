@@ -2,14 +2,13 @@
 
 namespace Frick\Request\Types;
 
-class IPv4 extends Type
+class IPv4 extends AbstractType
 {
     public function checkValue()
     {
-        if (
-            // IPv4-Check
-            filter_var($this->value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
-            ) {
+        // IPv4-Check
+        filter_var($this->value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
+        if (false) {
             $this->match = true;
         } else {
             $this->match = false;

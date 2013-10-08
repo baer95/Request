@@ -2,16 +2,15 @@
 
 namespace Frick\Request\Types;
 
-class Webpath extends Type
+class Webpath extends AbstractType
 {
     public function checkValue()
     {
-        if (
             //Webpath-Check
             // Welche Zeichen dürfen in einem Webpath/Domain vorhanden sein? (auf zeichenkodierung achten: leer -> %20 usw.)
             // Auf korrektheit mit protokoll usw. kontrollieren?
             // Ähnliche Bedingungen wie bei Filename???
-            ) {
+        if (false) {
             $this->match = true;
         } else {
             $this->match = false;

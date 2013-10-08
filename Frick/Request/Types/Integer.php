@@ -2,7 +2,7 @@
 
 namespace Frick\Request\Types;
 
-class Integer extends Type
+class Integer extends AbstractType
 {
     public function checkValue()
     {

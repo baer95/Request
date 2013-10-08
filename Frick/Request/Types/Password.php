@@ -2,7 +2,7 @@
 
 namespace Frick\Request\Types;
 
-class Password extends Type
+class Password extends AbstractType
 {
     public function checkValue()
     {

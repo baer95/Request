@@ -2,7 +2,7 @@
 
 namespace Frick\Request\Types;
 
-class Name extends Type
+class Name extends AbstractType
 {
     public function checkValue()
     {
@@ -12,7 +12,7 @@ class Name extends Type
             $this->match = true;
         } elseif ($match === 0) {
             $this->match = false;
-        } {
+        } else {
             throw new \Exception("Syntax Error in Regular Expression.", 1);
         }
         return $this;

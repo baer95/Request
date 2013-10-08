@@ -2,13 +2,12 @@
 
 namespace Frick\Request\Types;
 
-class HTML5 extends Type
+class HTML5 extends AbstractType
 {
     public function checkValue()
     {
-        if (
-            //HTML5-Check!
-            ) {
+        //HTML5-Check!
+        if (false) {
             $this->match = true;
         } else {
             $this->match = false;

@@ -2,7 +2,7 @@
 
 namespace Frick\Request\Types;
 
-class Float extends Type
+class Float extends AbstractType
 {
     public function checkValue()
     {

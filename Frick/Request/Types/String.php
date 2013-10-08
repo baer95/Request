@@ -2,16 +2,15 @@
 
 namespace Frick\Request\Types;
 
-class String extends Type
+class String extends AbstractType
 {
     public function checkValue()
     {
-        if (
             //String-Check
             // Tags entfernen ?
             // Entities / specialchars ?
             // Quotes escapen ?
-            ) {
+        if (false) {
             $this->match = true;
         } else {
             $this->match = false;
