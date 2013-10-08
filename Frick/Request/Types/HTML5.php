@@ -2,11 +2,13 @@
 
 namespace Frick\Request\Types;
 
-class Password extends Type
+class HTML5 extends Type
 {
     public function checkValue()
     {
-        if (strlen($this->value) >= 8) {
+        if (
+            //HTML5-Check!
+            ) {
             $this->match = true;
         } else {
             $this->match = false;
@@ -16,11 +18,8 @@ class Password extends Type
     public function correctValue()
     {
         if (!$this->match && $this->doCorrection) {
-            // $this->value korrigieren.
-            $this->value = password_hash(str_repeat($this->value, ceil(8/strlen($this->value))), PASSWORD_DEFAULT, ["cost" => 12]);
+            // $this->value korrigieren!
         }
         return $this;
     }
 }
-
-

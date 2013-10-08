@@ -17,6 +17,8 @@ class Numeric extends Type
     {
         if (!$this->match && $this->doCorrection) {
             // $this->value korrigieren.
+            $numericReplaceRegex = "/^[^0-9]+$/";
+            return preg_replace($numericReplaceRegex, "", $this->value);
         }
         return $this;
     }

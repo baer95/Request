@@ -8,6 +8,9 @@ class Webpath extends Type
     {
         if (
             //Webpath-Check
+            // Welche Zeichen dürfen in einem Webpath/Domain vorhanden sein? (auf zeichenkodierung achten: leer -> %20 usw.)
+            // Auf korrektheit mit protokoll usw. kontrollieren?
+            // Ähnliche Bedingungen wie bei Filename???
             ) {
             $this->match = true;
         } else {

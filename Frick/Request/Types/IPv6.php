@@ -8,6 +8,7 @@ class IPv6 extends Type
     {
         if (
             // IPv6-Check
+            filter_var($this->value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
             ) {
             $this->match = true;
         } else {

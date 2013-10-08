@@ -2,10 +2,6 @@
 
 namespace Frick\Request;
 
-// das richtige
-// das berichtigte
-// oder null
-
 class Adjust
 {
     /**
@@ -362,8 +358,6 @@ class Adjust
      */
     public static function REQUEST_IPv6($input, $adjust = true)
     {
-        // Definition SEHR kompliziert und schwer zu überprüfen...
-
         $filtered = filter_var($input, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
 
         if ($filtered !== false) {

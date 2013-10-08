@@ -8,6 +8,8 @@ class FilesystemPath extends Type
     {
         if (
             //Filesystem-Path-Check
+            // Filesystem-Pfade haben meistens laufwerksbuchstaben oder ./ oder ../
+            // gleiche bedingungen wie bei filename???
             ) {
             $this->match = true;
         } else {

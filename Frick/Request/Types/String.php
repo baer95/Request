@@ -8,6 +8,9 @@ class String extends Type
     {
         if (
             //String-Check
+            // Tags entfernen ?
+            // Entities / specialchars ?
+            // Quotes escapen ?
             ) {
             $this->match = true;
         } else {

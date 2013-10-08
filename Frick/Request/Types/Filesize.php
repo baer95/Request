@@ -8,6 +8,7 @@ class Filesize extends Type
     {
         if (
             //Filesize-Check
+            //kann int sein, kann aber auch string sein (2534 bytes usw.)
             ) {
             $this->match = true;
         } else {

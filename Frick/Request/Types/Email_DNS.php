@@ -2,12 +2,19 @@
 
 namespace Frick\Request\Types;
 
-class Json extends Type
+class Email_DNS extends Type
 {
+    /**
+     * The E-Mail Syntax is defined by RFC822 and RFC5321 which can be found here:
+     *
+     * @see http://tools.ietf.org/html/rfc822
+     * @see http://tools.ietf.org/html/rfc5321
+     */
     public function checkValue()
     {
-        json_decode($this->value);
-        if (json_last_error() === JSON_ERROR_NONE) {
+        $dnsCheck = checkdnsrr(substr($match, strpos($match, "@")+1), "MX");
+
+        if ($dnsCheck) {
             $this->match = true;
         } else {
             $this->match = false;
@@ -18,8 +25,7 @@ class Json extends Type
     {
         if (!$this->match && $this->doCorrection) {
             // $this->value korrigieren.
-            // zusätzliche protected var erstellen, in der json error gespeichert wird
-            // return "{\"ErrorCode\": ".json_last_error().",\"ErrorMessage\": \"".json_last_error_msg()."\"}";
+            // return false;
         }
         return $this;
     }

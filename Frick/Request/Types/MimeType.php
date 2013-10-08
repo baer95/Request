@@ -6,12 +6,14 @@ class MimeType extends Type
 {
     public function checkValue()
     {
-        if (
-            // MIME-Check
-            ) {
+        $mimeRegex = "/^[a-z\d]+[\/]{1}[a-z]{1}[a-z\d\.-]+$/i";
+        $match = preg_match($mimeRegex, $this->value);
+        if ($match === 1) {
             $this->match = true;
-        } else {
+        } elseif ($match === 0) {
             $this->match = false;
+        } else {
+            throw new \Exception("Syntax Error in Regular Expression.", 1);
         }
         return $this;
     }
@@ -19,6 +21,7 @@ class MimeType extends Type
     {
         if (!$this->match && $this->doCorrection) {
             // $this->value korrigieren.
+            return "multipart";
         }
         return $this;
     }

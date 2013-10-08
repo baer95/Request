@@ -8,6 +8,11 @@ class Filename extends Type
     {
         if (
             //Filename-Check, auf existenz prüfen?
+            //Welche zeichen sind in Windows/OSX/UNIX verboten?
+            //      Windows:    \/:*?"<>|
+            //      OSX:        ?
+            //      UNIX:       ?
+            // Hier auch tags entfernen und sonderzeichen kodieren?
             ) {
             $this->match = true;
         } else {
