@@ -11,7 +11,7 @@
 
 $testing = array(
     "binary" => "0bf8er4u84984444443tjß98fjtcg2349ß8htn3öt9omqtj",
-    "boolean" => true,
+    "boolean" => "false",
     "email" => "bernard.frick@gmx.at",
     "email_dns" => "bernard.frick@gmx.at",
     "filename" => "testing.pdf",
@@ -30,9 +30,8 @@ $testing = array(
     "string" => "abc ABC ß 1234567890 ,;.:-_ !? ^° \"'`´ §$%& (){}[] ~ +-*:/=",
     "username" => "b.frick",
     "webpath" => "http://localhost/Request/index.php",
+    "word" => "wort",
 );
-
-$_GET = $_POST = $_COOKIE = $testing;
 
 $parser = new \Frick\Request\Parser();
 
@@ -46,7 +45,7 @@ $parser->setType("email", new Types\Email());
 $parser->setType("email_dns", new Types\EmailDNS());
 $parser->setType("filename", new Types\Filename());
 $parser->setType("filesize", new Types\Filesize());
-$parser->setType("filesystemPath", new Types\filesystemPath());
+$parser->setType("filesystemPath", new Types\FilesystemPath());
 $parser->setType("float", new Types\Float());
 $parser->setType("html5", new Types\HTML5());
 $parser->setType("integer", new Types\Integer());
@@ -60,6 +59,7 @@ $parser->setType("password", new Types\Password());
 $parser->setType("string", new Types\String());
 $parser->setType("username", new Types\Username());
 $parser->setType("webpath", new Types\Webpath());
+$parser->setType("word", new Types\Word());
 
 try {
     $parser->parse();
@@ -69,12 +69,25 @@ try {
     echo $e->getFile();
 }
 
-$parsed_GET = $parser->getData("_GET");
-$parsed_POST = $parser->getData("_POST");
-$parsed_COOKIE = $parser->getData("_COOKIE");
 $parsed_testing = $parser->getData("testing");
 
-foreach ($testing as $key => $value) echo $key.":\n\t".gettype($value)." ".print_r($value, true)."\n\n";
+// foreach ($testing as $key => $value) {
+//     echo $key.":\n";
+//     echo "\t".gettype($value)." ".print_r($value, true)."\n";
+//     echo "\t".gettype($parsed_testing[$key])." ".print_r($parsed_testing[$key], true)."\n\n";
+// }
+
+// $file = "D:/Dropbox/wwwroot/Request/";
+// echo dirname($file);
+// echo (int) is_dir($file);
+// echo (int) file_exists($file);
+// echo (int) is_readable($file);
+// echo (int) is_executable($file);
+// echo (int) is_file($file);
+
+
+
+
 
             ?></pre>
         </div>
