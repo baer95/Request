@@ -7,7 +7,7 @@ class Filesize extends AbstractType
     public function checkValue()
     {
             //Filesize-Check
-            //kann int sein, kann aber auch string sein (2534 bytes usw.)
+            //kann int sein, kann aber auch string sein ("2534b" usw.)
         if (false) {
             $this->match = true;
         } else {
