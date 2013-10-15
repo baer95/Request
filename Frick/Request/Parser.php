@@ -15,13 +15,21 @@ class Parser
 
     protected $data_FILES = null;
     protected $types_FILES = null;
+    protected $doParseFiles = true;
 
     public function __construct()
     {
-        $this->addData("_GET", $_GET);
-        $this->addData("_POST", $_POST);
-        $this->addData("_COOKIE", $_COOKIE);
+        $this->addData('_GET', $_GET);
+        $this->addData('_POST', $_POST);
+        $this->addData('_COOKIE', $_COOKIE);
+
         $this->data_FILES = $_FILES;
+
+        $this->types_FILES['name'] =     new \Frick\Request\Types\Filename();
+        $this->types_FILES['type'] =     new \Frick\Request\Types\MimeType();
+        $this->types_FILES['size'] =     new \Frick\Request\Types\Integer();
+        $this->types_FILES['tmp_name'] = new \Frick\Request\Types\FilesystemPath();
+        $this->types_FILES['error'] =    new \Frick\Request\Types\Integer();
     }
     public function addData($key, $array)
     {
@@ -53,6 +61,14 @@ class Parser
             return $this->types;
         }
     }
+    public function setDoParseFiles($parse)
+    {
+        $this->doParseFiles = (bool) $parse;
+    }
+    public function getDoParseFiles()
+    {
+        return $this->doParseFiles;
+    }
     public function dataWalkRecursive($key, &$data, $types)
     {
         if (is_array($data)) {
@@ -74,11 +90,7 @@ class Parser
     public function parse()
     {
         $this->dataWalkRecursive(null, $this->data, $this->types);
-        return $this;
-    }
-    public function parse_FILES()
-    {
-        $this->dataWalkRecursive(null, $this->data_FILES, $this->types_FILES);
+        if ($this->doParseFiles) $this->dataWalkRecursive(null, $this->data_FILES, $this->types_FILES);
         return $this;
     }
 }
