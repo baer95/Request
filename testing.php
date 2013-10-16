@@ -33,43 +33,50 @@ $testing = array(
     "word" => "wort",
 );
 
-$parser = new \Frick\Request\Parser();
+// Testing the GeneralParser
+    $generalParser = new \Frick\Request\Parser\GeneralParser();
+    $generalParser->addData("testing", $testing);
 
-$parser->addData("testing", $testing);
+    use Frick\Request\Types as Types;
 
-use Frick\Request\Types as Types;
+    $generalParser->setType("binary", new Types\Binary());
+    $generalParser->setType("boolean", new Types\Boolean());
+    $generalParser->setType("email", new Types\Email());
+    $generalParser->setType("email_dns", new Types\EmailDNS());
+    $generalParser->setType("filename", new Types\Filename());
+    $generalParser->setType("filesize", new Types\Filesize());
+    $generalParser->setType("filesystemPath", new Types\FilesystemPath());
+    $generalParser->setType("float", new Types\Float());
+    $generalParser->setType("html5", new Types\HTML5());
+    $generalParser->setType("integer", new Types\Integer());
+    $generalParser->setType("ipv4", new Types\IPv4());
+    $generalParser->setType("ipv6", new Types\IPv6());
+    $generalParser->setType("json", new Types\Json());
+    $generalParser->setType("mimeType", new Types\MimeType());
+    $generalParser->setType("name", new Types\Name());
+    $generalParser->setType("numeric", new Types\Numeric());
+    $generalParser->setType("password", new Types\Password());
+    $generalParser->setType("string", new Types\String());
+    $generalParser->setType("username", new Types\Username());
+    $generalParser->setType("webpath", new Types\Webpath());
+    $generalParser->setType("word", new Types\Word());
 
-$parser->setType("binary", new Types\Binary());
-$parser->setType("boolean", new Types\Boolean());
-$parser->setType("email", new Types\Email());
-$parser->setType("email_dns", new Types\EmailDNS());
-$parser->setType("filename", new Types\Filename());
-$parser->setType("filesize", new Types\Filesize());
-$parser->setType("filesystemPath", new Types\FilesystemPath());
-$parser->setType("float", new Types\Float());
-$parser->setType("html5", new Types\HTML5());
-$parser->setType("integer", new Types\Integer());
-$parser->setType("ipv4", new Types\IPv4());
-$parser->setType("ipv6", new Types\IPv6());
-$parser->setType("json", new Types\Json());
-$parser->setType("mimeType", new Types\MimeType());
-$parser->setType("name", new Types\Name());
-$parser->setType("numeric", new Types\Numeric());
-$parser->setType("password", new Types\Password());
-$parser->setType("string", new Types\String());
-$parser->setType("username", new Types\Username());
-$parser->setType("webpath", new Types\Webpath());
-$parser->setType("word", new Types\Word());
+    try {
+        $generalParser->parse();
+    } catch (Exception $e) {
+        echo $e->getMessage();
+        echo $e->getLine();
+        echo $e->getFile();
+    }
 
-try {
-    $parser->parse();
-} catch (Exception $e) {
-    echo $e->getMessage();
-    echo $e->getLine();
-    echo $e->getFile();
-}
+    $parsedTesting = $generalParser->getData("testing");
+    print_r($parsedTesting);
 
-$parsed_testing = $parser->getData("testing");
+// Testing the FilesParser
+    $filesParser = new \Frick\Request\Parser\FilesParser();
+    print_r($filesParser->parse()->getData());
+
+
 
 // foreach ($testing as $key => $value) {
 //     echo $key.":\n";
