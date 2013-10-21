@@ -2,7 +2,7 @@
 
 namespace Frick\Request\Parser;
 
-class GeneralParser extends AbstractParser implements \Frick\Request\Interfaces\ParserInterface
+class Parser extends AbstractParser implements \Frick\Request\Interfaces\ParserInterface
 {
     protected $data = array();
     protected $types = array();
