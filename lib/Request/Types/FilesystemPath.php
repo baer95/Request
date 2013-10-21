@@ -1,15 +1,14 @@
 <?php
 
-namespace Frick\Request\Types;
+namespace Request\Types;
 
-class String extends AbstractType
+class FilesystemPath extends AbstractType
 {
     public function checkValue()
     {
-            //String-Check
-            // Tags entfernen ?
-            // Entities / specialchars ?
-            // Quotes escapen ?
+            //Filesystem-Path-Check
+            // Filesystem-Pfade haben meistens laufwerksbuchstaben oder ./ oder ../
+            // gleiche bedingungen wie bei filename???
         if (false) {
             $this->match = true;
         } else {
@@ -20,7 +19,7 @@ class String extends AbstractType
     public function correctValue()
     {
         if (!$this->match && $this->doCorrection) {
-            // $this->value korrigieren.
+            //korrigieren, existenz prüfen?
         }
         return $this;
     }

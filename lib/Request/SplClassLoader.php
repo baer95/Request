@@ -1,6 +1,6 @@
 <?php
 
-namespace Frick\Request;
+namespace Request;
 
 /**
  * SplClassLoader implementation that implements the technical interoperability

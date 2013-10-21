@@ -1,13 +1,12 @@
 <?php
 
-namespace Frick\Request\Types;
+namespace Request\Types;
 
-class HTML5 extends AbstractType
+class Integer extends AbstractType
 {
     public function checkValue()
     {
-        //HTML5-Check!
-        if (false) {
+        if (is_int($this->value)) {
             $this->match = true;
         } else {
             $this->match = false;
@@ -17,7 +16,7 @@ class HTML5 extends AbstractType
     public function correctValue()
     {
         if (!$this->match && $this->doCorrection) {
-            // $this->value korrigieren!
+            $this->value = (int) $this->value;
         }
         return $this;
     }

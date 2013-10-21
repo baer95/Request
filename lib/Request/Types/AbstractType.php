@@ -1,8 +1,8 @@
 <?php
 
-namespace Frick\Request\Types;
+namespace Request\Types;
 
-abstract class AbstractType implements \Frick\Request\Interfaces\TypeInterface
+abstract class AbstractType implements \Request\Interfaces\TypeInterface
 {
     public $value = null;
     public $doCorrection = true;

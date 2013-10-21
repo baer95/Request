@@ -1,12 +1,16 @@
 <?php
 
-namespace Frick\Request\Types;
+namespace Request\Types;
 
-class Numeric extends AbstractType
+class String extends AbstractType
 {
     public function checkValue()
     {
-        if (is_numeric($this->value)) {
+            //String-Check
+            // Tags entfernen ?
+            // Entities / specialchars ?
+            // Quotes escapen ?
+        if (false) {
             $this->match = true;
         } else {
             $this->match = false;
@@ -17,8 +21,6 @@ class Numeric extends AbstractType
     {
         if (!$this->match && $this->doCorrection) {
             // $this->value korrigieren.
-            $numericReplaceRegex = "/^[^0-9]+$/";
-            return preg_replace($numericReplaceRegex, "", $this->value);
         }
         return $this;
     }

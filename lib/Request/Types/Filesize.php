@@ -1,14 +1,13 @@
 <?php
 
-namespace Frick\Request\Types;
+namespace Request\Types;
 
-class FilesystemPath extends AbstractType
+class Filesize extends AbstractType
 {
     public function checkValue()
     {
-            //Filesystem-Path-Check
-            // Filesystem-Pfade haben meistens laufwerksbuchstaben oder ./ oder ../
-            // gleiche bedingungen wie bei filename???
+            //Filesize-Check
+            //kann int sein, kann aber auch string sein ("2534b" usw.)
         if (false) {
             $this->match = true;
         } else {
@@ -19,7 +18,7 @@ class FilesystemPath extends AbstractType
     public function correctValue()
     {
         if (!$this->match && $this->doCorrection) {
-            //korrigieren, existenz prüfen?
+            //$this->value korrigieren
         }
         return $this;
     }

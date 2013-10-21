@@ -1,8 +1,8 @@
 <?php
 
-namespace Frick\Request\Parser;
+namespace Request\Parser;
 
-class Parser extends AbstractParser implements \Frick\Request\Interfaces\ParserInterface
+class Parser extends AbstractParser implements \Request\Interfaces\ParserInterface
 {
     protected $data = array();
     protected $types = array();

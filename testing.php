@@ -34,10 +34,10 @@ $testing = array(
 );
 
 // Testing the Parser
-    $parser = new \Frick\Request\Parser\Parser();
+    $parser = new \Request\Parser\Parser();
     $parser->addData("testing", $testing);
 
-    use Frick\Request\Types as Types;
+    use Request\Types as Types;
 
     $parser->setType("binary", new Types\Binary());
     $parser->setType("boolean", new Types\Boolean());
@@ -73,7 +73,7 @@ $testing = array(
     print_r($parsedTesting);
 
 // Testing the FilesParser
-    $filesParser = new \Frick\Request\Parser\FilesParser();
+    $filesParser = new \Request\Parser\FilesParser();
     print_r($filesParser->parse()->getData());
 
 

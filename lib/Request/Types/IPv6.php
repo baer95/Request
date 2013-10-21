@@ -1,12 +1,13 @@
 <?php
 
-namespace Frick\Request\Types;
+namespace Request\Types;
 
-class Binary extends AbstractType
+class IPv6 extends AbstractType
 {
     public function checkValue()
     {
-        //Binary-Check!
+        // IPv6-Check
+        filter_var($this->value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
         if (false) {
             $this->match = true;
         } else {
@@ -17,7 +18,7 @@ class Binary extends AbstractType
     public function correctValue()
     {
         if (!$this->match && $this->doCorrection) {
-            // $this->value korrigieren!
+            // Korrigieren
         }
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Frick\Request\Types;
+namespace Request\Types;
 
 class Webpath extends AbstractType
 {

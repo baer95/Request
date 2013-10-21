@@ -1,6 +1,6 @@
 <?php
 
-namespace Frick\Request\Interfaces;
+namespace Request\Interfaces;
 
 interface TypeInterface
 {

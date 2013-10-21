@@ -1,12 +1,12 @@
 <?php
 
-namespace Frick\Request\Types;
+namespace Request\Types;
 
-class Float extends AbstractType
+class Password extends AbstractType
 {
     public function checkValue()
     {
-        if (is_float($this->value)) {
+        if (strlen($this->value) >= 8) {
             $this->match = true;
         } else {
             $this->match = false;
@@ -16,8 +16,11 @@ class Float extends AbstractType
     public function correctValue()
     {
         if (!$this->match && $this->doCorrection) {
-            $this->value = (float) $this->value;
+            // $this->value korrigieren.
+            $this->value = password_hash(str_repeat($this->value, ceil(8/strlen($this->value))), PASSWORD_DEFAULT, ["cost" => 12]);
         }
         return $this;
     }
 }
+
+

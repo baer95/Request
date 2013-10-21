@@ -1,8 +1,8 @@
 <?php
 
-namespace Frick\Request\Parser;
+namespace Request\Parser;
 
-abstract class AbstractParser implements \Frick\Request\Interfaces\ParserInterface
+abstract class AbstractParser implements \Request\Interfaces\ParserInterface
 {
     protected $data = array();
     protected $types = array();
@@ -26,7 +26,7 @@ abstract class AbstractParser implements \Frick\Request\Interfaces\ParserInterfa
             return $this->data;
         }
     }
-    public function setType($key, \Frick\Request\Interfaces\TypeInterface $type)
+    public function setType($key, \Request\Interfaces\TypeInterface $type)
     {
         $this->types[$key] = $type;
         return $this;

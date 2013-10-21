@@ -1,13 +1,12 @@
 <?php
 
-namespace Frick\Request\Types;
+namespace Request\Types;
 
-class Filesize extends AbstractType
+class HTML5 extends AbstractType
 {
     public function checkValue()
     {
-            //Filesize-Check
-            //kann int sein, kann aber auch string sein ("2534b" usw.)
+        //HTML5-Check!
         if (false) {
             $this->match = true;
         } else {
@@ -18,7 +17,7 @@ class Filesize extends AbstractType
     public function correctValue()
     {
         if (!$this->match && $this->doCorrection) {
-            //$this->value korrigieren
+            // $this->value korrigieren!
         }
         return $this;
     }
