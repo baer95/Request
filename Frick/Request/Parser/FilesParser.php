@@ -17,8 +17,4 @@ class FilesParser extends AbstractParser implements \Frick\Request\Interfaces\Pa
         $this->types['tmp_name'] = new \Frick\Request\Types\FilesystemPath();
         $this->types['error'] =    new \Frick\Request\Types\Integer();
     }
-    public function getData($key = null)
-    {
-        return $this->data;
-    }
 }
