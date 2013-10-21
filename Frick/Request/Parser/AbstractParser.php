@@ -26,7 +26,7 @@ abstract class AbstractParser implements \Frick\Request\Interfaces\ParserInterfa
             return $this->data;
         }
     }
-    public function setType($key, $type)
+    public function setType($key, \Frick\Request\Interfaces\TypeInterface $type)
     {
         $this->types[$key] = $type;
         return $this;
@@ -63,4 +63,3 @@ abstract class AbstractParser implements \Frick\Request\Interfaces\ParserInterfa
         return $this;
     }
 }
-
