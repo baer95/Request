@@ -1,16 +1,92 @@
 <?php
 
+// AKTUELL
+
 namespace Request\Parser;
 
-class Parser extends AbstractParser implements \Request\Interfaces\ParserInterface
+class Parser implements \Request\Interfaces\ParserInterface
 {
-    protected $data = array();
-    protected $types = array();
+    protected $inputValueArray = array();
+    protected $valueObjectArray = array();
 
-    public function __construct()
+    public function __construct($array)
     {
-        $this->data['_GET'] = $_GET;
-        $this->data['_POST'] = $_POST;
-        $this->data['_COOKIE'] = $_COOKIE;
+        $this->setInputValueArray($array);
+    }
+
+    public function setInputValueArray($array)
+    {
+        $this->inputValueArray = $array;
+    }
+
+    public function getInputValue($key)
+    {
+        return $this->valueObjectArray[$key]->getInputValue();
+    }
+
+    public function setType($key, \Request\Interfaces\ValueInterface $valueObject)
+    {
+        $valueObject->setInputValue($this->inputValueArray[$key]);
+        $this->valueObjectArray[$key] = $valueObject;
+    }
+
+    public function getType($key)
+    {
+        return get_class($this->valueObjectArray[$key]);
+    }
+
+    public function setDefaultValue($key, $defaultValue)
+    {
+        $this->valueObjectArray[$key]->setDefaultValue($defaultValue);
+    }
+
+    public function getDefaultValue($key)
+    {
+        return $this->valueObjectArray[$key]->getDefaultValue();
+    }
+
+    public function parseValues()
+    {
+        foreach ($this->valueObjectArray as $key => $valueObject) {
+            $valueObject->doMatch();
+            $valueObject->doCorrection();
+        }
+    }
+
+    public function getValueObject($key)
+    {
+        return $this->valueObjectArray[$key];
+    }
+
+    public function getMatch($key)
+    {
+        return $this->valueObjectArray[$key]->getMatch();
+    }
+
+    public function getMatchArray()
+    {
+        $matchArray = array();
+
+        foreach ($this->valueObjectArray as $key => $valueObject) {
+            $matchArray[$key] = $valueObject->getMatch();
+        }
+
+        return $matchArray;
+    }
+
+    public function getParsedValue($key)
+    {
+        return $this->valueObjectArray[$key]->getParsedValue();
+    }
+
+    public function getParsedValueArray()
+    {
+        $parsedValueArray = array();
+
+        foreach ($this->valueObjectArray as $key => $valueObject) {
+            $parsedValueArray[$key] = $valueObject->getParsedValue();
+        }
+
+        return $parsedValueArray;
     }
 }
