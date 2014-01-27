@@ -1,7 +1,5 @@
 <?php
 
-// AKTUELL
-
 namespace Request\Parser;
 
 class Parser implements \Request\Interfaces\ParserInterface
@@ -22,6 +20,17 @@ class Parser implements \Request\Interfaces\ParserInterface
     public function getInputValue($key)
     {
         return $this->valueObjectArray[$key]->getInputValue();
+    }
+
+    public function getInputValueArray()
+    {
+        $inputValueArray = array();
+
+        foreach ($this->valueObjectArray as $key => $valueObject) {
+            $inputValueArray[$key] = $valueObject->getInputValue();
+        }
+
+        return $inputValueArray;
     }
 
     public function setType($key, \Request\Interfaces\ValueInterface $valueObject)
