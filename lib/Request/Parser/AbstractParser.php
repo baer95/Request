@@ -1,11 +1,14 @@
 <?php
 
+// DEPRECATED
+
 namespace Request\Parser;
 
 abstract class AbstractParser implements \Request\Interfaces\ParserInterface
 {
     protected $data = array();
     protected $types = array();
+    protected $conf;
 
     abstract public function __construct();
 
@@ -18,6 +21,7 @@ abstract class AbstractParser implements \Request\Interfaces\ParserInterface
         }
         return $this;
     }
+
     public function getData($key = null)
     {
         if (null !== $key) {
@@ -26,11 +30,13 @@ abstract class AbstractParser implements \Request\Interfaces\ParserInterface
             return $this->data;
         }
     }
+
     public function setType($key, \Request\Interfaces\TypeInterface $type)
     {
         $this->types[$key] = $type;
         return $this;
     }
+
     public function getType($key = null)
     {
         if (null !== $key) {
@@ -39,6 +45,7 @@ abstract class AbstractParser implements \Request\Interfaces\ParserInterface
             return $this->types;
         }
     }
+
     public function dataWalkRecursive($key, &$data, $types)
     {
         if (is_array($data)) {
@@ -57,6 +64,7 @@ abstract class AbstractParser implements \Request\Interfaces\ParserInterface
             }
         }
     }
+
     public function parse()
     {
         $this->dataWalkRecursive(null, $this->data, $this->types);
