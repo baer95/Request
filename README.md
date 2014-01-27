@@ -95,7 +95,7 @@ $userData->setType("id", new Value\Integer());
 $userData->setDefaultValue("id", 1);
 
 $userData->setType("username", new Value\Username());
-$userData->setDefaultValue("username, "");
+$userData->setDefaultValue("username", "");
 
 $userData->setType("password", new Value\Password());
 $userData->setDefaultValue("passwort", "");
