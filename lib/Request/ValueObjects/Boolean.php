@@ -1,7 +1,5 @@
 <?php
 
-// AKTUELL
-
 namespace Request\ValueObjects;
 
 class Boolean extends \Request\ValueObjects\AbstractValue implements \Request\Interfaces\ValueInterface
@@ -12,15 +10,6 @@ class Boolean extends \Request\ValueObjects\AbstractValue implements \Request\In
             $this->match = true;
         } else {
             $this->match = false;
-        }
-    }
-    public function doCorrection()
-    {
-        if (is_null($this->match)) {
-            $this->doMatch();
-        }
-        if (!$this->match) {
-            $this->parsedValue = $this->defaultValue;
         }
     }
 }
