@@ -1,6 +1,6 @@
 Request
 =======
-A Class that parses REQUEST-Data so that it can be used safely later in the code.
+A Class that parses REQUEST-Data so that it can be used safely later in your webproject.
 
 Components
 ----------
@@ -8,6 +8,23 @@ The Request-Project consists of two files:
 
 * Parser.php
 * Adjust.php
+
+Request/
+├── Interfaces/
+│   ├── ParserInterface.php
+│   └── ValueInterface.php
+├── Parser/
+│   └── Parser.php
+└── ValueObjects/
+    ├── AbstractValue.php
+    ├── Boolean.php
+    ├── Email.php
+    ├── Float.php
+    ├── IPv4.php
+    ├── Json.php
+    └── ...
+
+
 
 ###Parser
 
