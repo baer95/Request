@@ -1,14 +1,15 @@
 <?php
 
+// DEPRECATED
+
 namespace Request\Parser;
 
 class FilesParser extends AbstractParser implements \Request\Interfaces\ParserInterface
 {
-    protected $data = array();
-    protected $types = array();
-
     public function __construct()
     {
+        $this->conf = new \Request\Configuration\Configuration();
+
         $this->data = $_FILES;
 
         $this->types['name'] =     new \Request\Types\Filename();
