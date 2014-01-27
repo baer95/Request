@@ -1,19 +1,29 @@
 <?php
 
+// AKTUELL
+
 namespace Request\Interfaces;
 
 interface ParserInterface
 {
-    public function __construct();
+    public function __construct($array);
 
-    public function addData($key, $array);
-    public function getData($key = null);
+    public function setInputValueArray($array);
+    public function getInputValue($key);
 
-    public function setType($key, \Request\Interfaces\TypeInterface $type);
-    public function getType($key = null);
+    public function setType($key, \Request\Interfaces\ValueInterface $type);
+    public function getType($key);
 
-    public function dataWalkRecursive($key, &$data, $types);
+    public function setDefaultValue($key, $defaultValue);
+    public function getDefaultValue($key);
 
-    public function parse();
+    public function parseValues();
+
+    public function getValueObject($key);
+
+    public function getMatch($key);
+    public function getMatchArray();
+
+    public function getParsedValue($key);
+    public function getParsedValueArray();
 }
-
