@@ -49,6 +49,7 @@ class IPv4 extends AbstractType
             // $ip = join(".", $parts);
 
             // return ($port != null) ? $ip.":".$port : $ip;
+            //$this->correctedValue = $corrected;
         }
         return $this;
     }

@@ -16,7 +16,7 @@ class Boolean extends AbstractType
     public function correctValue()
     {
         if (!$this->match && $this->doCorrection) {
-            $this->value = (bool) $this->value;
+            $this->correctedValue = (bool) $this->value;
         }
         return $this;
     }

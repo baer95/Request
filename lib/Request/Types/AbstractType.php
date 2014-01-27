@@ -1,10 +1,13 @@
 <?php
 
+// DEPRECATED
+
 namespace Request\Types;
 
 abstract class AbstractType implements \Request\Interfaces\TypeInterface
 {
     public $value = null;
+    public $correctedValue = null;
     public $doCorrection = true;
     public $match = null;
 

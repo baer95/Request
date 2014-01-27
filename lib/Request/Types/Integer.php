@@ -16,7 +16,7 @@ class Integer extends AbstractType
     public function correctValue()
     {
         if (!$this->match && $this->doCorrection) {
-            $this->value = (int) $this->value;
+            $this->correctedValue = (int) $this->value;
         }
         return $this;
     }

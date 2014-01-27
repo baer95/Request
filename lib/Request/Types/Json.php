@@ -20,6 +20,7 @@ class Json extends AbstractType
             // $this->value korrigieren.
             // zusätzliche protected var erstellen, in der json error gespeichert wird
             // return "{\"ErrorCode\": ".json_last_error().",\"ErrorMessage\": \"".json_last_error_msg()."\"}";
+            $this->correctedValue = $corrected;
         }
         return $this;
     }

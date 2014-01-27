@@ -16,7 +16,7 @@ class Float extends AbstractType
     public function correctValue()
     {
         if (!$this->match && $this->doCorrection) {
-            $this->value = (float) $this->value;
+            $this->correctedValue = (float) $this->value;
         }
         return $this;
     }
