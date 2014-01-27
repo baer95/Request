@@ -75,8 +75,6 @@ Assuming, all Request-related files are saved in "path/to/your/project/lib/Reque
 Usage
 -----
 
-###GET, POST, COOKIE
-
 To use the Parser just follow the example below:
 
 ```php
