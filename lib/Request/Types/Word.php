@@ -1,5 +1,7 @@
 <?php
 
+// DEPRECATED
+
 namespace Request\Types;
 
 class Word extends AbstractType
