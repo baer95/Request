@@ -92,9 +92,16 @@ $userData = new \Request\Parser\Parser($arrayToParse);
 use Request\ValueObjects as Value;
 
 $userData->setType("id", new Value\Integer());
+$userData->setDefaultValue("id", 1);
+
 $userData->setType("username", new Value\Username());
+$userData->setDefaultValue("username, "");
+
 $userData->setType("password", new Value\Password());
+$userData->setDefaultValue("passwort", "");
+
 $userData->setType("lastLogin", new Value\Integer());
+$userData->setDefaultValue("lastLogin", 0);
 
 $userData->parseValues();
 
