@@ -1,7 +1,5 @@
 <?php
 
-// AKTUELL
-
 namespace Request\Interfaces;
 
 Interface ValueInterface
