@@ -15,6 +15,7 @@ class Parser implements \Request\Interfaces\ParserInterface
     public function setInputValueArray($array)
     {
         $this->inputValueArray = $array;
+        return $this;
     }
 
     public function getInputValue($key)
@@ -37,6 +38,7 @@ class Parser implements \Request\Interfaces\ParserInterface
     {
         $valueObject->setInputValue($this->inputValueArray[$key]);
         $this->valueObjectArray[$key] = $valueObject;
+        return $this;
     }
 
     public function getType($key)
@@ -47,6 +49,7 @@ class Parser implements \Request\Interfaces\ParserInterface
     public function setDefaultValue($key, $defaultValue)
     {
         $this->valueObjectArray[$key]->setDefaultValue($defaultValue);
+        return $this;
     }
 
     public function getDefaultValue($key)
@@ -60,6 +63,7 @@ class Parser implements \Request\Interfaces\ParserInterface
             $valueObject->doMatch();
             $valueObject->doCorrection();
         }
+        return $this;
     }
 
     public function getValueObject($key)
