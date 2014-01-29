@@ -7,11 +7,6 @@ class Json extends \Request\ValueObjects\AbstractValue implements \Request\Inter
     public function doMatch()
     {
         json_decode($this->inputValue);
-        if (json_last_error() === JSON_ERROR_NONE) {
-            $this->match = true;
-        } else {
-            $this->match = false;
-        }
-        return $this;
+        $this->match = json_last_error() === JSON_ERROR_NONE ? true : false;
     }
 }

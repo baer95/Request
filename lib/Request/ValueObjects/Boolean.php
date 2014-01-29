@@ -6,10 +6,6 @@ class Boolean extends \Request\ValueObjects\AbstractValue implements \Request\In
 {
     public function doMatch()
     {
-        if (is_bool($this->inputValue)) {
-            $this->match = true;
-        } else {
-            $this->match = false;
-        }
+        $this->match = is_bool($this->inputValue);
     }
 }

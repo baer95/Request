@@ -6,10 +6,6 @@ class Integer extends \Request\ValueObjects\AbstractValue implements \Request\In
 {
     public function doMatch()
     {
-        if (is_integer($this->inputValue)) {
-            $this->match = true;
-        } else {
-            $this->match = false;
-        }
+        $this->match = is_integer($this->inputValue);
     }
 }

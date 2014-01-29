@@ -6,10 +6,6 @@ class Float extends \Request\ValueObjects\AbstractValue implements \Request\Inte
 {
     public function doMatch()
     {
-        if (is_float($this->inputValue)) {
-            $this->match = true;
-        } else {
-            $this->match = false;
-        }
+        $this->match = is_float($this->inputValue);
     }
 }

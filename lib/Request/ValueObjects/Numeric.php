@@ -6,10 +6,6 @@ class Numeric extends \Request\ValueObjects\AbstractValue implements \Request\In
 {
     public function doMatch()
     {
-        if (is_numeric($this->inputValue)) {
-            $this->match = true;
-        } else {
-            $this->match = false;
-        }
+        $this->match = is_numeric($this->inputValue);
     }
 }
