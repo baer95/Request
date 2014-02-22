@@ -7,7 +7,7 @@ mb_regex_encoding(mb_internal_encoding());
 
 require_once("lib/SplClassLoader/SplClassLoader.php");
 
-$classLoader = new \SplClassLoader("Request", 'D:/Dropbox/wwwroot/Request/lib');
+$classLoader = new \SplClassLoader\SplClassLoader("Request", 'D:/Dropbox/wwwroot/__projects/Request/lib');
 $classLoader->register();
 
 include("index.inc.php");
