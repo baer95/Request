@@ -15,10 +15,9 @@ The Request-Project consists of the following files:
     └── ValueObjects/
         ├── AbstractValue.php
         ├── Boolean.php
+        ├── Digits.php
         ├── Email.php
         ├── Float.php
-        ├── IPv4.php
-        ├── Json.php
         └── ...
 
 The Request/ValueObjects-Folder holds a file containing a class for each data-dype. This class holds the definition of a data-type and is based on the class AbstractValue, which provides basic functionality to work with the data-to-parse. If you are missing a data-type, feel free to add another one and make a pull-request.
