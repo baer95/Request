@@ -4,8 +4,8 @@ namespace Request\ValueObjects;
 
 class Boolean extends \Request\ValueObjects\AbstractValue implements \Request\Interfaces\ValueInterface
 {
-    public function doMatch()
+    public function doCorrection()
     {
-        $this->match = is_bool($this->inputValue);
+        $this->correctedValue = (boolean) $this->inputValue;
     }
 }

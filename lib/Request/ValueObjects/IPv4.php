@@ -4,24 +4,47 @@ namespace Request\ValueObjects;
 
 class IPv4 extends \Request\ValueObjects\AbstractValue implements \Request\Interfaces\ValueInterface
 {
-    public function doMatch()
+    public function doCorrection()
     {
-        $position = stripos($this->inputValue, ":");
+        $portPosition = stripos($this->inputValue, ":");
 
-        if ($position === false) {
-            // kein Doppelpunkt --> kein Port
-            $this->match = (filter_var($this->inputValue, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) === false) ? false : true;
+        if ($portPosition === false) {
+            // es gibt keinen port
+            $ip = $this->inputValue;
+            $port = false;
         } else {
-            // Doppelpunkt --> Port
-            $filtered_ip = filter_var(substr($this->inputValue, 0, $position), FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
-
-            $port = substr($this->inputValue, $position + 1);
-            $filtered_port = is_numeric($port);
-            if ($filtered_port) {
-                $port = (int) $port;
-                $range = ($port <= 65535 AND $port >= 0) ? true : false;
-            }
-            $this->match = ($filtered_ip !== false AND $filtered_port AND $range) ? true : false;
+            // es gibt einen port, also wegschneiden
+            $ip = substr($this->inputValue, 0, $portPosition);
+            $port = substr($this->inputValue, $portPosition + 1);
         }
+
+            // IP korrigieren
+        $parts = explode(".", trim($ip));
+        foreach ($parts as &$part) {
+            $part = (int) trim($part);
+            if ($part < 0 OR $part > 255) {
+                $part = 1;
+            }
+        }
+
+        $countPart = count($parts);
+
+        if ($countPart > 4) {
+            $parts = array_slice($parts, 0, 4);
+        } elseif ($countPart < 4) {
+            $parts = array_pad($parts, 4, 1);
+        }
+
+        $ip = implode(".", $parts);
+
+            // Port berichtigen
+        if ($port !== false) {
+            $port = (int) trim($port);
+            if ($port > 65535 OR $port < 0 ) {
+                $port = 0;
+            }
+        }
+
+        $this->correctedValue = $port === false ? $ip : $ip.":".$port;
     }
 }
