@@ -1,6 +1,6 @@
 <?php
 
-@$db = new \mysqli("localhost", "root", "Xp78K5b", "xss");
+@$db = new \mysqli("localhost", "user", "pass", "xss");
 
 $sql = "INSERT INTO `xss`.`data` (
     `id`, `active`, `updated`, `request_time`, `remote_addr`, `user_agent`, `data`
