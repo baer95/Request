@@ -36,8 +36,14 @@ class Parser implements \Request\Interfaces\ParserInterface
 
     public function setType($key, \Request\Interfaces\ValueInterface $valueObject)
     {
-        $valueObject->setInputValue($this->inputValueArray[$key]);
+        if (array_key_exists($key, $this->inputValueArray)) {
+            $valueObject->setInputValue($this->inputValueArray[$key]);
+        } else {
+            $valueObject->setInputValue(false);
+        }
+
         $this->valueObjectArray[$key] = $valueObject;
+
         return $this;
     }
 
@@ -57,18 +63,41 @@ class Parser implements \Request\Interfaces\ParserInterface
         return $this->valueObjectArray[$key]->getDefaultValue();
     }
 
-    public function parseValues()
+    public function resetDefaultValue($key)
     {
-        foreach ($this->valueObjectArray as $key => $valueObject) {
-            $valueObject->doMatch();
-            $valueObject->doCorrection();
-        }
-        return $this;
+        $this->valueObjectArray[$key]->resetDefaultValue();
     }
 
-    public function getValueObject($key)
+    public function getCorrectedValue($key)
     {
-        return $this->valueObjectArray[$key];
+        return $this->valueObjectArray[$key]->getCorrectedValue();
+    }
+
+    public function getCorrectedValueArray()
+    {
+        $correctedValueArray = array();
+
+        foreach ($this->valueObjectArray as $key => $valueObject) {
+            $correctedValueArray[$key] = $valueObject->getCorrectedValue();
+        }
+
+        return $correctedValueArray;
+    }
+
+    public function getOutputValue($key)
+    {
+        return $this->valueObjectArray[$key]->getOutputValue();
+    }
+
+    public function getOutputValueArray()
+    {
+        $outputValueArray = array();
+
+        foreach ($this->valueObjectArray as $key => $valueObject) {
+            $outputValueArray[$key] = $valueObject->getOutputValue();
+        }
+
+        return $outputValueArray;
     }
 
     public function getMatch($key)
@@ -87,19 +116,15 @@ class Parser implements \Request\Interfaces\ParserInterface
         return $matchArray;
     }
 
-    public function getParsedValue($key)
+    public function getValueObject($key)
     {
-        return $this->valueObjectArray[$key]->getParsedValue();
+        return $this->valueObjectArray[$key];
     }
 
-    public function getParsedValueArray()
+    public function execute()
     {
-        $parsedValueArray = array();
-
         foreach ($this->valueObjectArray as $key => $valueObject) {
-            $parsedValueArray[$key] = $valueObject->getParsedValue();
+            $valueObject->execute();
         }
-
-        return $parsedValueArray;
     }
 }

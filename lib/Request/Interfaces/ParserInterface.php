@@ -8,20 +8,25 @@ interface ParserInterface
 
     public function setInputValueArray($array);
     public function getInputValue($key);
+    public function getInputValueArray();
 
-    public function setType($key, \Request\Interfaces\ValueInterface $type);
+    public function setType($key, \Request\Interfaces\ValueInterface $valueObject);
     public function getType($key);
 
     public function setDefaultValue($key, $defaultValue);
     public function getDefaultValue($key);
+    public function resetDefaultValue($key);
 
-    public function parseValues();
+    public function getCorrectedValue($key);
+    public function getCorrectedValueArray();
 
-    public function getValueObject($key);
+    public function getOutputValue($key);
+    public function getOutputValueArray();
 
     public function getMatch($key);
     public function getMatchArray();
 
-    public function getParsedValue($key);
-    public function getParsedValueArray();
+    public function getValueObject($key);
+
+    public function execute();
 }
